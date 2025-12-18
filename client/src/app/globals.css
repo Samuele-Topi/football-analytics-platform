@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  /* Command Center Palette */
+  --background: #121212; /* Deep Charcoal */
+  --foreground: #ededed;
+  
+  --surface: #1E1E1E; /* Slate Gray */
+  --surface-hover: #2C2C2C;
+  
+  --primary: #00FF41; /* Pitch Green */
+  --primary-foreground: #000000;
+  
+  --secondary: #FFB000; /* Warning Amber */
+  --secondary-foreground: #000000;
+  
+  --danger: #FF3B30; /* Crimson */
+  --danger-foreground: #ffffff;
+
+  --muted: #2d2d2d;
+  --muted-foreground: #a1a1aa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  antialiased: true;
+}
+
+/* Custom Scrollbar for sleek look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background); 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface); 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground); 
+}

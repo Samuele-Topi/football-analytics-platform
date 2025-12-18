@@ -23,3 +23,8 @@
 ## Tools
 *   **Version Control:** Git
 *   **Package Manager:** pnpm (Node), poetry/pip (Python)
+
+## Quality Assurance & Testing
+*   **Frontend:** Vitest, React Testing Library
+*   **Backend:** Pytest
+*   **E2E:** Playwright (Optional)

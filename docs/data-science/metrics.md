@@ -28,3 +28,18 @@ Every action (tackle, pass, foul) is valued by how much it increases the probabi
 *   **Intervention Efficiency:** (Successful Interceptions / Potential Interceptions).
 *   **Pressure Intensity:** Measured in $m/s^2$ (Acceleration towards the ball carrier).
 *   **Covering Distance:** Distance covered while the ball is in the opponent's possession in your designated "defensive zone."
+
+## 6. Composite & Derived Indices (New)
+These metrics are calculated by combining multiple base stats to represent complex attributes.
+
+*   **Build-up Score:** Measures a player's contribution to moving the ball from the defensive third to the attacking third.
+    *   *Formula:* `(0.4 * Progressive Passes) + (0.4 * Progressive Carries) + (0.2 * Pass Completion %)`
+*   **Press Resistance Score:** Quantifies a player's ability to retain possession under pressure.
+    *   *Formula:* `(Dribbles Success % * 0.5) + (Pass % Under Pressure * 0.3) + (Fouls Won * 0.2)`
+*   **Clinical Finishing Index:** Measures efficiency in front of goal relative to expected output.
+    *   *Formula:* `(Goals / xG) * 100` (Baseline is 100).
+*   **Defensive Dominance Rating:** A composite of all duel types.
+    *   *Formula:* `(Aerial Win % + Ground Duel Win % + Tackle Success %) / 3`
+*   **Keeper Sweeper Index:**
+    *   *Formula:* `(Defensive Actions Outside Box per 90) * (Avg. Distance from Goal)`
+

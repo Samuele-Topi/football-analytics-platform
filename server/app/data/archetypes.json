@@ -1,0 +1,250 @@
+{
+  "GK": {
+    "Sweeper-Keeper": {
+      "weights": {
+        "defensive_actions_outside_box": 0.9,
+        "avg_distance_from_goal": 0.85,
+        "short_pass_accuracy": 0.8,
+        "psxg_plus_minus": 0.6,
+        "launch_percent": 0.2
+      }
+    },
+    "Shot-Stopper": {
+      "weights": {
+        "psxg_plus_minus": 1.0,
+        "save_percent": 0.9,
+        "handling": 0.85,
+        "reflex_save_percent": 0.9,
+        "crosses_stopped_percent": 0.6
+      }
+    },
+    "Commander": {
+      "weights": {
+        "crosses_stopped_percent": 0.9,
+        "aerial_win_percent": 0.85,
+        "defensive_organization_rating": 0.8,
+        "punched_actions": 0.75
+      }
+    },
+    "Distributor": {
+      "weights": {
+        "long_pass_accuracy": 0.9,
+        "throw_success": 0.85,
+        "side_volley_accuracy": 0.8,
+        "passes_into_final_third": 0.75,
+        "progressive_passes": 0.7
+      }
+    }
+  },
+  "DF": {
+    "CB": {
+      "The Wall": {
+        "weights": {
+          "blocks": 0.9,
+          "clearances": 0.85,
+          "aerial_win_percent": 0.9,
+          "tackles_defensive_third": 0.8,
+          "dribblers_tackled_percent": 0.75
+        }
+      },
+      "Ball-Playing": {
+        "weights": {
+          "progressive_passes": 0.9,
+          "passes_into_final_third": 0.85,
+          "progressive_carries": 0.8,
+          "switch_of_play": 0.75,
+          "long_pass_accuracy": 0.7
+        }
+      },
+      "The Aggressor": {
+        "weights": {
+          "interceptions": 0.9,
+          "tackles_midfield_third": 0.85,
+          "pressures": 0.8,
+          "fouls_committed": 0.6
+        }
+      },
+      "Sweeper-Cover": {
+        "weights": {
+          "recovery_speed": 0.9,
+          "tackles_last_man": 0.95,
+          "positioning_delta": 0.85,
+          "interceptions": 0.7
+        }
+      },
+      "Wide Center-Back": {
+        "weights": {
+          "overlapping_runs": 0.8,
+          "crosses_from_deep": 0.75,
+          "dribbles": 0.7,
+          "progressive_carries": 0.75
+        }
+      }
+    },
+    "FB": {
+      "Attacking Wing-Back": {
+        "weights": {
+          "sprints": 0.9,
+          "crosses": 0.85,
+          "key_passes": 0.8,
+          "touches_in_opp_box": 0.75,
+          "progressive_carries": 0.8
+        }
+      },
+      "Inverted Fullback": {
+        "weights": {
+          "central_pass_completion": 0.9,
+          "underlapping_runs": 0.85,
+          "positional_fluidity": 0.8,
+          "passes_into_final_third": 0.75
+        }
+      },
+      "No-Nonsense FB": {
+        "weights": {
+          "dribblers_tackled_percent": 0.95,
+          "tackles_won": 0.9,
+          "low_positional_deviation": 0.85,
+          "clearances": 0.8
+        }
+      },
+      "Playmaking Fullback": {
+        "weights": {
+          "through_balls": 0.9,
+          "xa": 0.85,
+          "long_pass_accuracy": 0.8,
+          "progressive_passes": 0.85,
+          "sca": 0.75
+        }
+      }
+    }
+  },
+  "MF": {
+    "Regista": {
+      "weights": {
+        "deep_completions": 0.9,
+        "tempo_setting": 0.85,
+        "long_ball_accuracy": 0.9,
+        "progressive_passes": 0.8
+      }
+    },
+    "Destroyer": {
+      "weights": {
+        "tackles_won": 0.95,
+        "interceptions": 0.9,
+        "ground_duels_won": 0.9,
+        "recoveries": 0.85
+      }
+    },
+    "Anchorman": {
+      "weights": {
+        "positional_discipline": 0.95,
+        "short_pass_safety": 0.9,
+        "pressure_resistance_score": 0.85,
+        "turnovers": -0.8
+      }
+    },
+    "Box-to-Box": {
+      "weights": {
+        "distance_covered": 0.95,
+        "sprints": 0.9,
+        "late_box_entries": 0.85,
+        "recoveries": 0.8,
+        "progressive_carries": 0.75
+      }
+    },
+    "Mezzala": {
+      "weights": {
+        "crosses_from_half_space": 0.9,
+        "dribbles": 0.8,
+        "sca": 0.85,
+        "passes_into_penalty_area": 0.8
+      }
+    },
+    "Creative Hub": {
+      "weights": {
+        "key_passes": 0.95,
+        "xa": 0.9,
+        "through_balls": 0.9,
+        "sca": 0.85,
+        "pass_completion_under_pressure": 0.8
+      }
+    },
+    "Shadow Striker": {
+      "weights": {
+        "shots_on_target": 0.9,
+        "touches_in_box": 0.85,
+        "goals_per_90": 0.9,
+        "xg": 0.85
+      }
+    }
+  },
+  "FW": {
+    "Poacher": {
+      "weights": {
+        "xg_per_shot": 0.95,
+        "touches_in_box": 0.9,
+        "conversion_rate": 0.95,
+        "goals": 1.0,
+        "touches": 0.2
+      }
+    },
+    "Target Man": {
+      "weights": {
+        "aerial_duels_won": 0.95,
+        "hold_up_success": 0.9,
+        "lay_offs": 0.85,
+        "shot_creating_actions": 0.7
+      }
+    },
+    "False 9": {
+      "weights": {
+        "passes_into_final_third": 0.9,
+        "avg_distance_from_goal": 0.8,
+        "dribbles": 0.85,
+        "sca": 0.85,
+        "assists": 0.8
+      }
+    },
+    "Raumdeuter": {
+      "weights": {
+        "off_ball_movement_value": 0.95,
+        "shot_accuracy": 0.85,
+        "positioning_delta": 0.9,
+        "xg": 0.8
+      }
+    },
+    "Inside Forward": {
+      "weights": {
+        "dribbles_into_box": 0.9,
+        "shots_from_distance": 0.8,
+        "inverted_runs": 0.85,
+        "goals": 0.85
+      }
+    },
+    "Creative Winger": {
+      "weights": {
+        "crosses": 0.95,
+        "1v1_success": 0.9,
+        "progressive_carries": 0.85,
+        "xa": 0.8
+      }
+    },
+    "Pressing Forward": {
+      "weights": {
+        "turnovers_forced": 0.95,
+        "high_pressures": 0.9,
+        "defensive_actions_attacking_third": 0.9,
+        "tackles_won": 0.8
+      }
+    },
+    "Advanced Forward": {
+      "weights": {
+        "runs_in_behind": 0.95,
+        "offside_frequency": 0.6,
+        "speed_deltas": 0.9,
+        "goals": 0.9,
+        "xg": 0.85
+      }
+    }
+  }
+}

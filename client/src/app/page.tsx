@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Activity, Target, Users, TrendingUp } from "lucide-react";
 
+import { MarketValueChart } from "@/components/dashboard/MarketValueChart";
+
 export default function Home() {
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -65,7 +67,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="rounded-xl border border-white/5 bg-surface p-6 lg:col-span-2 min-h-[400px]"
+          className="rounded-xl border border-white/5 bg-surface p-6 lg:col-span-2 min-h-[400px] flex flex-col"
         >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-white">Market Value Trends</h2>
@@ -75,8 +77,8 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <div className="flex h-full items-center justify-center border-2 border-dashed border-white/10 rounded-lg">
-            <p className="text-muted-foreground">Interactive Chart Component</p>
+          <div className="flex-1 w-full h-full min-h-[300px]">
+            <MarketValueChart />
           </div>
         </motion.div>
 

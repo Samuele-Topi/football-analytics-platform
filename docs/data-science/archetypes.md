@@ -39,24 +39,28 @@ This document provides a granular breakdown of every player and team archetype. 
 *   **The Mezzala:** Central mid that drifts wide to half-spaces. `Crosses from Half-Space`, `Dribbles`, `Shot-Creating Actions`. (Example: De Bruyne).
 *   **The Carrilero (Shuttler):** Lateral cover. `Lateral Interceptions`, `Support Passes`, `Positional Coverage`.
 *   **The Creative Hub (10):** The final ball specialist. `Key Passes`, `xA`, `Through Balls`, `SCA`.
-*   **The Shadow Striker:** Aggressive 10. `Shots on Target`, `Touches in Box`, `Goals per 90`. (Example: Müller).
+## 4. Player Archetypes: Wingers (WG)
+
+*   **The Classic Winger:** Hugs the touchline, beats the fullback on the outside. High weight on `Crosses`, `Sprints`, and `Dribbles`.
+*   **The Inverted Winger:** Cuts inside onto strong foot to shoot. High weight on `Dribbles into Box`, `Shots from Distance`, and `Inverted Runs`. (Example: Salah, Vinícius).
+*   **The Wide Playmaker:** Drifts inside to overload central areas. High weight on `Key Passes`, `Through Balls`, `xA`, and `Passes into Penalty Area`. (Example: Grealish, Bernardo Silva).
+*   **The Defensive Winger:** Workhorse on the flank, protects the fullback. High weight on `Tackles`, `Recoveries`, `Pressures`, and `Distance Covered`. (Example: Valverde (at RW), Kuyt).
+*   **The Raumdeuter (Space Investigator):** (Can also be classified here). Unconventional movement. `Off-ball Movement Value`, `Shot Accuracy`, `Positioning`. (Example: Müller).
 
 ---
 
-## 4. Player Archetypes: Forwards (FW)
+## 5. Player Archetypes: Forwards (FW)
 
+*   **The Complete Forward:** The total package. Good in air, link-up, and finishing. Balanced high weights on `Goals`, `Aerial Duels`, `Assists`, and `Hold-up Play`. (Example: Kane, Lewandowski).
 *   **The Fox-in-the-Box (Poacher):** Minimal touches, maximum goals. `xG per Shot`, `Touches in Box`, `Conversion Rate`. (Example: Haaland).
 *   **The Target Man:** Physical focal point. `Aerial Duels Won`, `Hold-up Success`, `Lay-offs`. (Example: Giroud).
 *   **The False 9:** Drops deep to create space. `Passes into Final Third`, `Distance from Goal`, `Dribbles`. (Example: Messi, Firmino).
-*   **The Raumdeuter (Space Investigator):** Unconventional movement. `Off-ball Movement Value`, `Shot Accuracy`, `Positioning`. (Example: Müller).
-*   **The Inside Forward:** Winger that cuts inside. `Dribbles into Box`, `Shots from Distance`, `Inverted Runs`. (Example: Salah, Vinícius).
-*   **The Creative Winger:** Touchline hugger. `Crosses`, `1v1 Success`, `Progressive Carries`.
 *   **The Pressing Forward:** Defensive vanguard. `Turnovers Forced`, `High Pressures`, `Defensive Actions in Attacking Third`. (Example: Watkins).
 *   **The Advanced Forward:** Stretches play. `Runs in Behind`, `Offside Frequency (High)`, `Speed Deltas`.
 
 ---
 
-## 5. Team Archetypes (Tactical DNA)
+## 6. Team Archetypes (Tactical DNA)
 
 *   **Tiki-Taka:** High possession, short passing, extreme control. (>65% Possession, <12.0 PPDA).
 *   **Vertical Tiki-Taka:** Possession-based but fast forward progression. (>55% Possession, High `Progressive Pass` count).
@@ -70,7 +74,7 @@ This document provides a granular breakdown of every player and team archetype. 
 
 ---
 
-## 6. Managerial Archetypes
+## 7. Managerial Archetypes
 
 *   **The Tactician:** High frequency of formation/system changes in-game.
 *   **The Motivator:** Performance delta improvement in high-pressure matches/derbies.

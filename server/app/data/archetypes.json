@@ -178,7 +178,63 @@
       }
     }
   },
+  "WG": {
+    "Classic Winger": {
+      "weights": {
+        "crosses": 0.95,
+        "1v1_success": 0.9,
+        "progressive_carries": 0.85,
+        "xa": 0.8,
+        "sprints": 0.85
+      }
+    },
+    "Inverted Winger": {
+      "weights": {
+        "dribbles_into_box": 0.9,
+        "shots_from_distance": 0.8,
+        "inverted_runs": 0.85,
+        "goals": 0.85,
+        "touches_in_box": 0.8
+      }
+    },
+    "Wide Playmaker": {
+      "weights": {
+        "key_passes": 0.9,
+        "through_balls": 0.85,
+        "xa": 0.9,
+        "passes_into_penalty_area": 0.85,
+        "dribbles_infield": 0.8
+      }
+    },
+    "Defensive Winger": {
+      "weights": {
+        "tackles_won": 0.85,
+        "recoveries": 0.9,
+        "pressures": 0.9,
+        "distance_covered": 0.85,
+        "assists": 0.6
+      }
+    },
+    "Raumdeuter": {
+      "weights": {
+        "off_ball_movement_value": 0.95,
+        "shot_accuracy": 0.85,
+        "positioning_delta": 0.9,
+        "xg": 0.8,
+        "touches": 0.4
+      }
+    }
+  },
   "FW": {
+    "Complete Forward": {
+      "weights": {
+        "goals": 0.9,
+        "aerial_duels_won": 0.85,
+        "assists": 0.8,
+        "hold_up_success": 0.8,
+        "shots_on_target": 0.85
+      }
+    },
     "Poacher": {
       "weights": {
         "xg_per_shot": 0.95,
@@ -203,30 +259,6 @@
         "dribbles": 0.85,
         "sca": 0.85,
         "assists": 0.8
-      }
-    },
-    "Raumdeuter": {
-      "weights": {
-        "off_ball_movement_value": 0.95,
-        "shot_accuracy": 0.85,
-        "positioning_delta": 0.9,
-        "xg": 0.8
-      }
-    },
-    "Inside Forward": {
-      "weights": {
-        "dribbles_into_box": 0.9,
-        "shots_from_distance": 0.8,
-        "inverted_runs": 0.85,
-        "goals": 0.85
-      }
-    },
-    "Creative Winger": {
-      "weights": {
-        "crosses": 0.95,
-        "1v1_success": 0.9,
-        "progressive_carries": 0.85,
-        "xa": 0.8
       }
     },
     "Pressing Forward": {

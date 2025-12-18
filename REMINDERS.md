@@ -6,7 +6,8 @@ This file serves as the strict operational protocol for the "Football Analytics 
 
 ## 1. Git Hygiene
 *   **COMMIT FREQUENTLY:** Never leave work uncommitted at the end of a response/task.
-*   **PUSH ALWAYS:** After every commit, execute `git push` to ensure remote synchronization.
+*   **PUSH REMINDER:** After every commit, remind the user to push from their own terminal (since I cannot push directly).
+*   **USER PUSH:** The user is responsible for executing `git push` to ensure remote synchronization.
 *   **DETAILED MESSAGES:** Commit messages must explain *why* a change was made, not just *what* changed.
     *   *Bad:* "Updated file."
     *   *Good:* "feat(scoring): Implemented weight adjustment for goalkeeper distribution metric."

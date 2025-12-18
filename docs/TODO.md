@@ -17,11 +17,12 @@
 - [x] **Setup:** Tailwind CSS configured with custom palette (v4).
 - [x] **Component:** Basic `Layout` shell (Navbar) implemented.
 - [x] **Routing:** App Router structure established.
-- [ ] **State:** Set up Zustand stores for player filtering.
-- [ ] **Charts:** Implement initial Recharts for market value trends.
+- [x] **State:** Interactive components with local state (Settings).
+- [x] **Charts:** Implement initial Recharts for market value trends.
+- [x] **Visualization:** Live tactical pitch visualization.
 
 ## 📝 Documentation
 - [x] **Master Data Dictionary:** Complete.
 - [x] **Archetypes:** Complete.
-- [x] **Frontend Structure:** Documented in `docs/frontend/structure.md`.
-- [ ] **API Spec:** Auto-generate OpenAPI JSON from FastAPI (once setup).
+- [x] **Frontend Structure:** Updated in `docs/frontend/structure.md`.
+- [x] **Changelog:** Updated to v1.3.1.

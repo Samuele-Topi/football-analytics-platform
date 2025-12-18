@@ -5,8 +5,8 @@
 **Status:** Architecture Finalized
 
 ## 🛠️ Technical Foundation
-*   **[System Architecture](../ARCHITECTURE.md):** Monorepo, Data Flow, and Scalability.
-*   **[Technology Stack](../STACK.md):** Next.js, FastAPI, PostgreSQL, Redis.
+*   **[System Architecture](./ARCHITECTURE.md):** Monorepo, Data Flow, and Scalability.
+*   **[Technology Stack](./STACK.md):** Next.js, FastAPI, PostgreSQL, Redis.
 *   **[Database Schema](./backend/schema.md):** ER Diagrams and Table Definitions.
 
 ## 🧪 Data Science & Analytics (The Core)
@@ -21,7 +21,7 @@
 *   **[Interactive Components](./frontend/README.md#key-components):** Pitch maps, Radars, Momentum waves.
 
 ## 📋 Management
-*   **[Project Roadmap](../ROADMAP.md):** Feature milestones.
-*   **[TODO List](../TODO.md):** Immediate next steps.
-*   **[Changelog](../CHANGELOG.md):** Version history.
-*   **[Developer Reminders](../../REMINDERS.md):** Git and Documentation protocols.
+*   **[Project Roadmap](./ROADMAP.md):** Feature milestones.
+*   **[TODO List](./TODO.md):** Immediate next steps.
+*   **[Changelog](./CHANGELOG.md):** Version history.
+*   **[Developer Reminders](../REMINDERS.md):** Git and Documentation protocols.

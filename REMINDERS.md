@@ -26,5 +26,9 @@ This file serves as the strict operational protocol for the "Football Analytics 
 *   **NO BROKEN BUILDS:** Ensure the application builds before ending a session.
 *   **LINT/FORMAT:** Run standard linters before committing.
 
+## 5. Backups
+*   **MAJOR UPDATES:** Before any major update or refactor, create a backup of the affected components in the `backups/` directory.
+*   **LOCAL ONLY:** The `backups/` directory must be ignored by git to keep the repository clean.
+
 ---
 *Signed: The Full-Stack Architect & The Data Engineer*

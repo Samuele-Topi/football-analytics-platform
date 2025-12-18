@@ -1,27 +1,35 @@
-# Project Documentation Hub (Master Index)
+# 📚 Documentation Hub
 
 **Project:** Football Analytics Platform
-**Version:** 1.0.0
+**Version:** 1.2.1
 **Status:** Architecture Finalized
 
-## 🛠️ Technical Foundation
-*   **[System Architecture](./ARCHITECTURE.md):** Monorepo, Data Flow, and Scalability.
-*   **[Technology Stack](./STACK.md):** Next.js, FastAPI, PostgreSQL, Redis.
-*   **[Database Schema](./backend/schema.md):** ER Diagrams and Table Definitions.
+Welcome to the technical documentation for the Football Analytics Platform. This directory serves as the single source of truth for all engineering, data science, and product specifications.
 
-## 🧪 Data Science & Analytics (The Core)
-*   **[Methodology Overview](./data-science/README.md):** High-level goals.
-*   **[Advanced Metrics](./data-science/metrics.md):** xT, VAEP, GSA, and Pitch Control.
-*   **[Archetype Dictionary](./data-science/archetypes.md):** 50+ Player and Team tactical roles.
-*   **[Scoring Logic](./data-science/scoring-logic.md):** The 0-10.0 Rating Algorithm.
-*   **[Market Valuation](./data-science/market-valuation.md):** Economic and performance modeling.
+---
 
-## 🎨 UI/UX & Frontend
-*   **[Design System](./frontend/README.md):** Colors, Components, and Visual Philosophy.
-*   **[Interactive Components](./frontend/README.md#key-components):** Pitch maps, Radars, Momentum waves.
+## 🏗️ System Architecture & Engineering
+*   **[System Architecture](./ARCHITECTURE.md):** High-level overview of the Monorepo structure, Data Flow, and Hybrid Storage Strategy.
+*   **[Technology Stack](./STACK.md):** Detailed breakdown of frontend, backend, and infrastructure choices.
+*   **[Architecture Audit](./reviews/architecture_audit.md):** (Dec 2025) Internal review and scaling recommendations.
 
-## 📋 Management
-*   **[Project Roadmap](./ROADMAP.md):** Feature milestones.
-*   **[TODO List](./TODO.md):** Immediate next steps.
-*   **[Changelog](./CHANGELOG.md):** Version history.
-*   **[Developer Reminders](../REMINDERS.md):** Git and Documentation protocols.
+## 🧪 Data Science & Methodology
+*   **[Methodology Overview](./data-science/README.md):** The philosophy behind our metrics.
+*   **[Master Data Dictionary](./data-science/MASTER_DATA_DICTIONARY.md):** 🌟 **The definitive catalog** of all 60+ metrics, data sources, and formulas.
+*   **[Archetype Dictionary](./data-science/archetypes.md):** Comprehensive definitions of all 50+ Player Roles (e.g., *Inverted Winger*, *Ball-Playing CB*).
+*   **[Advanced Metrics](./data-science/metrics.md):** Deep dives into xT, VAEP, and composite scores.
+*   **[Scoring Logic](./data-science/scoring-logic.md):** How the 0-10.0 Rating Algorithm works.
+
+## 💻 Implementation Guides
+*   **[Backend Guide](./backend/README.md):** API structure, Models, and Celery tasks.
+*   **[Frontend Guide](./frontend/README.md):** Design System, UI Components, and Visualization logic.
+
+## 📅 Project Management
+*   **[Roadmap](./ROADMAP.md):** Strategic milestones and phase tracking.
+*   **[TODO List](./TODO.md):** Tactical task tracking for developers.
+*   **[Changelog](./CHANGELOG.md):** Version history and release notes.
+
+---
+
+### 📝 Protocols
+*   **[Developer Reminders](../REMINDERS.md):** Strict protocols for Git hygiene, commit messages, and version control.

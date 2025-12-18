@@ -1,22 +1,24 @@
-# TODO List
+# 📋 Developer TODO List
 
-## Immediate Tasks (Infrastructure)
-- [ ] Initialize `client/` with `npx create-next-app`
-- [ ] Initialize `server/` with Python virtual environment and FastAPI
-- [ ] Configure `docker-compose.yml` for local PostgreSQL/Redis
-- [ ] Set up Husky for Git hooks (version bumping & linting)
+**Focus:** Phase 1 (Foundation) & Phase 2 (Data Engine)
 
-## Data Engineering
-- [ ] Finalize Event Data Schema
-- [ ] Implement xG (Expected Goals) calculation logic
-- [ ] Implement PPDA (Pressing) calculation logic
-- [ ] Create data ingestion script for match history
+## 🚨 Immediate Priorities
+- [ ] **Scaffold Client:** Run `npx create-next-app@latest` in `/client`.
+- [ ] **Scaffold Server:** Initialize Poetry and FastAPI in `/server`.
+- [ ] **Environment:** Create `docker-compose.yml` for local DB/Redis.
+- [ ] **Tooling:** Configure `eslint`, `prettier`, and `ruff` (Python linter).
 
-## Frontend Development
-- [ ] Set up Theme Configuration (Dark Mode, Football-centric colors)
-- [ ] Create reusable `Pitch` component (SVG-based)
-- [ ] Implement `PlayerCard` component for role-based ratings
+## 🛠️ Data Engineering Tasks
+- [ ] **Schema Implementation:** Create SQLAlchemy models based on the Data Dictionary.
+- [ ] **Migration Setup:** Configure Alembic for database migrations.
+- [ ] **Ingestion Script:** Write basic script to load `archetypes.json` into DB.
 
-## Documentation
-- [ ] Document the Evaluation Algorithm (Mathematical breakdown)
-- [ ] Create API Reference (Swagger/OpenAPI sync)
+## 🎨 Frontend Tasks
+- [ ] **Setup:** Configure Tailwind CSS with project color palette.
+- [ ] **Component:** Create basic `Layout` shell (Sidebar, Header).
+- [ ] **Routing:** Set up App Router structure.
+
+## 📝 Documentation
+- [x] **Master Data Dictionary:** Complete.
+- [x] **Archetypes:** Complete.
+- [ ] **API Spec:** Auto-generate OpenAPI JSON from FastAPI (once setup).

@@ -51,12 +51,12 @@ export default function ShortlistPage() {
                           <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors">
                             <Link href={`/world/Europe/England/Premier League/Man City/${player.name}`}>{player.name}</Link>
                           </h3>
-                          <p className="text-sm text-muted-foreground flex items-center gap-2">
+                          <div className="text-sm text-muted-foreground flex items-center gap-2">
                             <div className="h-5 w-5 bg-white/10 rounded p-1 flex items-center justify-center">
                                 <img src={getTeamLogo(player.teamId)!} alt="Team" className="h-full w-full object-contain" />
                             </div>
                             {player.team} • <span className="text-primary font-medium">{player.position}</span> • {player.age} yo
-                          </p>
+                          </div>
                       </div>
                   </div>
                   

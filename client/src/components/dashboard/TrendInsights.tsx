@@ -86,7 +86,7 @@ export function TrendInsights() {
                         <div className="h-3.5 w-3.5 bg-white/10 rounded-sm p-0.5 flex items-center justify-center">
                             <img src={getTeamLogo(item.teamId)!} alt="Team" className="h-full w-full object-contain" />
                         </div>
-                        <p className="text-[10px] text-muted-foreground">{item.team} • <span className="text-primary/80">{item.pos}</span></p>
+                        <div className="text-[10px] text-muted-foreground">{item.team} • <span className="text-primary/80">{item.pos}</span></div>
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.3] - 2025-12-19
+
+### Added
+- **Player Profile:** Dedicated dynamic route (`/player/[id]`) with detailed stats and attributes.
+- **Visual Modes:** Added Heatmap, Pass Network, and Shots visualization modes to the Match Analysis pitch.
+- **Cross-Linking:** Player names in Scouting, Match, and Dashboard now link to their profile.
+
+### Changed
+- **Match Analysis:** Timeline scrubber is now interactive.
+- **Scouting:** Fixed logic for Age and Potential range sliders.
+
 ## [1.3.2] - 2025-12-19
 
 ### Added

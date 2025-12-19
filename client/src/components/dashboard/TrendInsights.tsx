@@ -1,34 +1,33 @@
-"use client";
-
+import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Minus, Star, DollarSign, Activity } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Activity } from "lucide-react";
 
 type Tab = "performance" | "market" | "scouting";
 
 const DATA = {
   performance: [
-    { name: "Erling Haaland", team: "Man City", metric: "+1.2 xG", value: 9.8, status: "up" },
-    { name: "Vinicius Jr", team: "Real Madrid", metric: "+0.8 xA", value: 9.5, status: "up" },
-    { name: "Onana", team: "Man Utd", metric: "-0.5 PSxG", value: 6.2, status: "down" },
-    { name: "Salah", team: "Liverpool", metric: "+0.4 xG", value: 8.9, status: "neutral" },
-    { name: "Rice", team: "Arsenal", metric: "92% Pass", value: 8.7, status: "up" },
+    { id: 1, name: "Erling Haaland", team: "Man City", metric: "+1.2 xG", value: 9.8, status: "up" },
+    { id: 2, name: "Vinicius Jr", team: "Real Madrid", metric: "+0.8 xA", value: 9.5, status: "up" },
+    { id: 3, name: "Onana", team: "Man Utd", metric: "-0.5 PSxG", value: 6.2, status: "down" },
+    { id: 4, name: "Salah", team: "Liverpool", metric: "+0.4 xG", value: 8.9, status: "neutral" },
+    { id: 5, name: "Rice", team: "Arsenal", metric: "92% Pass", value: 8.7, status: "up" },
   ],
   market: [
-    { name: "Lamine Yamal", team: "Barcelona", metric: "+€15M", value: "€85M", status: "up" },
-    { name: "Evan Ferguson", team: "Brighton", metric: "+€8M", value: "€42M", status: "up" },
-    { name: "Sancho", team: "Man Utd", metric: "-€5M", value: "€25M", status: "down" },
-    { name: "Wirtz", team: "Leverkusen", metric: "+€12M", value: "€95M", status: "up" },
-    { name: "Neymar", team: "Al Hilal", metric: "-€10M", value: "€40M", status: "down" },
+    { id: 6, name: "Lamine Yamal", team: "Barcelona", metric: "+€15M", value: "€85M", status: "up" },
+    { id: 7, name: "Evan Ferguson", team: "Brighton", metric: "+€8M", value: "€42M", status: "up" },
+    { id: 8, name: "Sancho", team: "Man Utd", metric: "-€5M", value: "€25M", status: "down" },
+    { id: 9, name: "Wirtz", team: "Leverkusen", metric: "+€12M", value: "€95M", status: "up" },
+    { id: 10, name: "Neymar", team: "Al Hilal", metric: "-€10M", value: "€40M", status: "down" },
   ],
   scouting: [
-    { name: "Estevao", team: "Palmeiras", metric: "Wonderkid", value: "9.9 Pot", status: "up" },
-    { name: "Echeverri", team: "River Plate", metric: "Elite", value: "9.5 Pot", status: "up" },
-    { name: "Bardghji", team: "Copenhagen", metric: "Prospect", value: "8.8 Pot", status: "neutral" },
-    { name: "Moscardo", team: "PSG", metric: "Rotation", value: "8.5 Pot", status: "neutral" },
-    { name: "Tel", team: "Bayern", metric: "Starter", value: "9.2 Pot", status: "up" },
+    { id: 11, name: "Estevao", team: "Palmeiras", metric: "Wonderkid", value: "9.9 Pot", status: "up" },
+    { id: 12, name: "Echeverri", team: "River Plate", metric: "Elite", value: "9.5 Pot", status: "up" },
+    { id: 13, name: "Bardghji", team: "Copenhagen", metric: "Prospect", value: "8.8 Pot", status: "neutral" },
+    { id: 14, name: "Moscardo", team: "PSG", metric: "Rotation", value: "8.5 Pot", status: "neutral" },
+    { id: 15, name: "Tel", team: "Bayern", metric: "Starter", value: "9.2 Pot", status: "up" },
   ],
 };
 
@@ -72,16 +71,16 @@ export function TrendInsights() {
             {DATA[activeTab].map((item, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-transparent hover:border-white/5 group cursor-pointer"
+                className="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-transparent hover:border-white/5 group"
               >
                 <div className="flex items-center gap-3">
                   <div className="h-8 w-8 rounded-full bg-surface flex items-center justify-center border border-white/5 text-xs font-bold text-muted-foreground group-hover:text-white group-hover:border-primary/50 transition-colors">
                     {i + 1}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white group-hover:text-primary transition-colors">
+                    <Link href={`/player/${item.id}`} className="text-sm font-medium text-white group-hover:text-primary transition-colors hover:underline">
                       {item.name}
-                    </p>
+                    </Link>
                     <p className="text-xs text-muted-foreground">{item.team}</p>
                   </div>
                 </div>

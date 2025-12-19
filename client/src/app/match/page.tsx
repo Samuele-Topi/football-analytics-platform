@@ -1,13 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MatchPitch } from "@/components/match/MatchPitch";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, BarChart2, Share2, Download, PlayCircle, Star } from "lucide-react";
+import { Calendar, Clock, BarChart2, Share2, Download, PlayCircle, Star, PauseCircle } from "lucide-react";
+import Link from "next/link";
+
+type ViewMode = "replay" | "heatmap" | "passnetwork" | "shots";
 
 export default function MatchPage() {
+  const [viewMode, setViewMode] = useState<ViewMode>("replay");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [timelineValue, setTimelineValue] = useState(62);
+
   return (
     <div className="container mx-auto p-6 space-y-8 min-h-screen">
       {/* Header / Match Selector */}
@@ -88,31 +96,64 @@ export default function MatchPage() {
              <div className="p-3 border-b border-white/5 bg-surface flex justify-between items-center px-4">
                 <div className="flex items-center gap-2">
                     <BarChart2 className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-white">Tactical Replay</span>
+                    <span className="text-sm font-medium text-white">Tactical Feed</span>
                 </div>
                 <div className="flex gap-2">
-                   <Button variant="ghost" size="sm" className="h-8 text-xs">Heatmap</Button>
-                   <Button variant="ghost" size="sm" className="h-8 text-xs bg-white/5">Pass Network</Button>
-                   <Button variant="ghost" size="sm" className="h-8 text-xs">Shots</Button>
+                   <Button 
+                      variant={viewMode === 'heatmap' ? 'default' : 'ghost'} 
+                      size="sm" 
+                      className="h-8 text-xs"
+                      onClick={() => setViewMode('heatmap')}
+                   >Heatmap</Button>
+                   <Button 
+                      variant={viewMode === 'passnetwork' ? 'default' : 'ghost'} 
+                      size="sm" 
+                      className="h-8 text-xs"
+                      onClick={() => setViewMode('passnetwork')}
+                   >Pass Network</Button>
+                   <Button 
+                      variant={viewMode === 'shots' ? 'default' : 'ghost'} 
+                      size="sm" 
+                      className="h-8 text-xs"
+                      onClick={() => setViewMode('shots')}
+                   >Shots</Button>
+                    <Button 
+                      variant={viewMode === 'replay' ? 'default' : 'ghost'} 
+                      size="sm" 
+                      className="h-8 text-xs"
+                      onClick={() => setViewMode('replay')}
+                   >Replay</Button>
                 </div>
              </div>
              <div className="relative flex-1 p-6 flex items-center justify-center bg-black/20">
-                <MatchPitch />
+                <MatchPitch mode={viewMode} />
              </div>
              {/* Timeline Scrubber */}
              <div className="p-4 bg-surface border-t border-white/5">
                  <div className="flex items-center gap-4">
-                     <Button variant="ghost" size="icon"><PlayCircle className="h-6 w-6" /></Button>
-                     <div className="flex-1 h-2 bg-white/10 rounded-full relative cursor-pointer group">
-                         <div className="absolute top-0 left-0 h-full w-[65%] bg-primary rounded-full" />
-                         <div className="absolute top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2 h-4 w-4 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                     <Button 
+                        variant="ghost" 
+                        size="icon"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                     >
+                        {isPlaying ? <PauseCircle className="h-6 w-6" /> : <PlayCircle className="h-6 w-6" />}
+                     </Button>
+                     <div className="flex-1 relative group">
+                         <input 
+                            type="range" 
+                            min="0" 
+                            max="90" 
+                            value={timelineValue}
+                            onChange={(e) => setTimelineValue(parseInt(e.target.value))}
+                            className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
+                         />
                          
                          {/* Goal Markers */}
-                         <div className="absolute top-0 left-[23%] h-2 w-1 bg-white/50" title="Goal 1-0" />
-                         <div className="absolute top-0 left-[45%] h-2 w-1 bg-white/50" title="Goal 1-1" />
-                         <div className="absolute top-0 left-[88%] h-2 w-1 bg-white/50" title="Goal 2-1" />
+                         <div className="absolute top-1/2 -translate-y-1/2 left-[23%] h-2 w-1 bg-white/50 pointer-events-none" title="Goal 1-0" />
+                         <div className="absolute top-1/2 -translate-y-1/2 left-[45%] h-2 w-1 bg-white/50 pointer-events-none" title="Goal 1-1" />
+                         <div className="absolute top-1/2 -translate-y-1/2 left-[88%] h-2 w-1 bg-white/50 pointer-events-none" title="Goal 2-1" />
                      </div>
-                     <span className="text-xs font-mono text-muted-foreground">62:14 / 90:00</span>
+                     <span className="text-xs font-mono text-muted-foreground w-12 text-right">{timelineValue}:00</span>
                  </div>
              </div>
           </Card>
@@ -127,7 +168,7 @@ export default function MatchPage() {
                 <div className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-full bg-white/10" />
                     <div>
-                        <p className="font-bold text-white">Kevin De Bruyne</p>
+                        <Link href="/player/1" className="font-bold text-white hover:text-primary transition-colors hover:underline">Kevin De Bruyne</Link>
                         <p className="text-xs text-muted-foreground">8.9 Rating • 1 Goal • 1 Assist</p>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ This file serves as the strict operational protocol for the "Football Analytics 
     *   *Good:* "feat(scoring): Implemented weight adjustment for goalkeeper distribution metric."
 
 ## 2. Documentation Sync
-*   **UPDATE DOCS:** If code changes, the corresponding documentation in `docs/` MUST be updated immediately.
+*   **UPDATE DOCS:** If code changes, the corresponding documentation in README.md and in `docs/` MUST be updated immediately.
 *   **REFLECT ARCHITECTURE:** If a folder moves or a schema changes, update `docs/ARCHITECTURE.md` or `docs/backend/schema.md`.
 
 ## 3. Version Control

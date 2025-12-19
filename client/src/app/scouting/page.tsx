@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
@@ -130,9 +131,9 @@ export default function ScoutingPage() {
                                 type="range" 
                                 min="16" 
                                 max="40" 
-                                className="w-full accent-primary h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
                                 value={filters.maxAge}
-                                onChange={(e) => setFilters({...filters, maxAge: parseInt(e.target.value)})}
+                                onChange={(e) => setFilters(prev => ({...prev, maxAge: parseInt(e.target.value)}))}
                             />
                         </div>
                          <div className="space-y-2">
@@ -144,9 +145,9 @@ export default function ScoutingPage() {
                                 type="range" 
                                 min="50" 
                                 max="99" 
-                                className="w-full accent-primary h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary"
                                 value={filters.minPotential}
-                                onChange={(e) => setFilters({...filters, minPotential: parseInt(e.target.value)})}
+                                onChange={(e) => setFilters(prev => ({...prev, minPotential: parseInt(e.target.value)}))}
                             />
                         </div>
                     </div>
@@ -169,9 +170,9 @@ export default function ScoutingPage() {
                 <div className="p-6 space-y-4">
                     <div className="flex justify-between items-start">
                     <div>
-                        <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors">
+                        <Link href={`/player/${player.id}`} className="font-bold text-lg text-white group-hover:text-primary transition-colors hover:underline">
                         {player.name}
-                        </h3>
+                        </Link>
                         <p className="text-sm text-muted-foreground">{player.team}</p>
                     </div>
                     <Badge variant="outline" className="bg-white/5">

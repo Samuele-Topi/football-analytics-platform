@@ -1,0 +1,437 @@
+
+export interface Team {
+  id: string | number;
+  name: string;
+}
+
+export interface League {
+  id: string;
+  name: string;
+  teams: Team[];
+}
+
+export interface Nation {
+  name: string;
+  code: string; // ISO Code for flag
+  leagues: League[];
+}
+
+export interface Continent {
+  name: string;
+  slug: string;
+  nations: Nation[];
+}
+
+export const WORLD_DATA: Continent[] = [
+  {
+    name: "Europe",
+    slug: "europe",
+    nations: [
+      {
+        name: "England",
+        code: "GB-ENG",
+        leagues: [
+          {
+            id: "PL",
+            name: "Premier League",
+            teams: [
+              { id: 1, name: "Arsenal" },
+              { id: 2, name: "Aston Villa" },
+              { id: 127, name: "Bournemouth" },
+              { id: 130, name: "Brentford" },
+              { id: 131, name: "Brighton" },
+              { id: "leeds", name: "Leeds United" },
+              { id: "burnley", name: "Burnley" },
+              { id: 4, name: "Chelsea" },
+              { id: 6, name: "Crystal Palace" },
+              { id: 7, name: "Everton" },
+              { id: 34, name: "Fulham" },
+              { id: 8, name: "Liverpool" },
+              { id: 43, name: "Man City" },
+              { id: 11, name: "Man Utd" },
+              { id: 23, name: "Newcastle" },
+              { id: 15, name: "Nott'm Forest" },
+              { id: "sheff", name: "Sheffield United" },
+              { id: 21, name: "Tottenham" },
+              { id: 25, name: "West Ham" },
+              { id: 38, name: "Wolves" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Spain",
+        code: "ES",
+        leagues: [
+          {
+            id: "LALIGA",
+            name: "La Liga",
+            teams: [
+              { id: "es-ala", name: "Alavés" },
+              { id: "es-ath", name: "Athletic Club" },
+              { id: "es-atm", name: "Atlético Madrid" },
+              { id: "es-bar", name: "Barcelona" },
+              { id: "es-cel", name: "Celta Vigo" },
+              { id: "es-esp", name: "Espanyol" },
+              { id: "es-get", name: "Getafe" },
+              { id: "es-gir", name: "Girona" },
+              { id: "es-pal", name: "Las Palmas" },
+              { id: "es-leg", name: "Leganés" },
+              { id: "es-mal", name: "Mallorca" },
+              { id: "es-osa", name: "Osasuna" },
+              { id: "es-ray", name: "Rayo Vallecano" },
+              { id: "es-bet", name: "Real Betis" },
+              { id: "es-rma", name: "Real Madrid" },
+              { id: "es-rso", name: "Real Sociedad" },
+              { id: "es-val", name: "Real Valladolid" },
+              { id: "es-sev", name: "Sevilla" },
+              { id: "es-valcf", name: "Valencia" },
+              { id: "es-vil", name: "Villarreal" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Germany",
+        code: "DE",
+        leagues: [
+          {
+            id: "BUNDESLIGA",
+            name: "Bundesliga",
+            teams: [
+              { id: "de-aug", name: "Augsburg" },
+              { id: "de-uni", name: "Union Berlin" },
+              { id: "de-boc", name: "Bochum" },
+              { id: "de-bre", name: "Werder Bremen" },
+              { id: "de-dor", name: "Dortmund" },
+              { id: "de-fra", name: "Eintracht Frankfurt" },
+              { id: "de-fre", name: "Freiburg" },
+              { id: "de-hei", name: "Heidenheim" },
+              { id: "de-hof", name: "Hoffenheim" },
+              { id: "de-kie", name: "Holstein Kiel" },
+              { id: "de-lei", name: "RB Leipzig" },
+              { id: "de-lev", name: "Leverkusen" },
+              { id: "de-mai", name: "Mainz 05" },
+              { id: "de-gla", name: "M'gladbach" },
+              { id: "de-bay", name: "Bayern Munich" },
+              { id: "de-pau", name: "St. Pauli" },
+              { id: "de-stu", name: "Stuttgart" },
+              { id: "de-wol", name: "Wolfsburg" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Italy",
+        code: "IT",
+        leagues: [
+          {
+            id: "SERIEA",
+            name: "Serie A",
+            teams: [
+              { id: "it-ata", name: "Atalanta" },
+              { id: "it-bol", name: "Bologna" },
+              { id: "it-cag", name: "Cagliari" },
+              { id: "it-com", name: "Como" },
+              { id: "it-emp", name: "Empoli" },
+              { id: "it-fio", name: "Fiorentina" },
+              { id: "it-gen", name: "Genoa" },
+              { id: "it-ver", name: "Verona" },
+              { id: "it-int", name: "Inter Milan" },
+              { id: "it-juv", name: "Juventus" },
+              { id: "it-laz", name: "Lazio" },
+              { id: "it-lec", name: "Lecce" },
+              { id: "it-mil", name: "AC Milan" },
+              { id: "it-mon", name: "Monza" },
+              { id: "it-nap", name: "Napoli" },
+              { id: "it-par", name: "Parma" },
+              { id: "it-rom", name: "Roma" },
+              { id: "it-tor", name: "Torino" },
+              { id: "it-udi", name: "Udinese" },
+              { id: "it-ven", name: "Venezia" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "France",
+        code: "FR",
+        leagues: [
+          {
+            id: "LIGUE1",
+            name: "Ligue 1",
+            teams: [
+              { id: "fr-ang", name: "Angers" },
+              { id: "fr-aux", name: "Auxerre" },
+              { id: "fr-bre", name: "Brest" },
+              { id: "fr-hav", name: "Le Havre" },
+              { id: "fr-len", name: "Lens" },
+              { id: "fr-lil", name: "Lille" },
+              { id: "fr-lyo", name: "Lyon" },
+              { id: "fr-mar", name: "Marseille" },
+              { id: "fr-mon", name: "Monaco" },
+              { id: "fr-mpe", name: "Montpellier" },
+              { id: "fr-nan", name: "Nantes" },
+              { id: "fr-nic", name: "Nice" },
+              { id: "fr-psg", name: "PSG" },
+              { id: "fr-rei", name: "Reims" },
+              { id: "fr-ren", name: "Rennes" },
+              { id: "fr-ste", name: "Saint-Étienne" },
+              { id: "fr-str", name: "Strasbourg" },
+              { id: "fr-tou", name: "Toulouse" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "North America",
+    slug: "north-america",
+    nations: [
+      {
+        name: "USA",
+        code: "US",
+        leagues: [
+          {
+            id: "MLS",
+            name: "Major League Soccer",
+            teams: [
+              { id: "us-atl", name: "Atlanta United" },
+              { id: "us-aus", name: "Austin FC" },
+              { id: "us-cha", name: "Charlotte FC" },
+              { id: "us-chi", name: "Chicago Fire" },
+              { id: "us-cin", name: "FC Cincinnati" },
+              { id: "us-col", name: "Colorado Rapids" },
+              { id: "us-col-crew", name: "Columbus Crew" },
+              { id: "us-dal", name: "FC Dallas" },
+              { id: "us-dcu", name: "D.C. United" },
+              { id: "us-hou", name: "Houston Dynamo" },
+              { id: "us-laf", name: "LAFC" },
+              { id: "us-lag", name: "LA Galaxy" },
+              { id: "us-mia", name: "Inter Miami" },
+              { id: "us-min", name: "Minnesota United" },
+              { id: "us-mtl", name: "CF Montréal" },
+              { id: "us-nas", name: "Nashville SC" },
+              { id: "us-ner", name: "New England" },
+              { id: "us-nyc", name: "NYCFC" },
+              { id: "us-nyr", name: "NY Red Bulls" },
+              { id: "us-orl", name: "Orlando City" },
+              { id: "us-phi", name: "Philadelphia Union" },
+              { id: "us-por", name: "Portland Timbers" },
+              { id: "us-rsl", name: "Real Salt Lake" },
+              { id: "us-sje", name: "San Jose Earthquakes" },
+              { id: "us-sea", name: "Seattle Sounders" },
+              { id: "us-skc", name: "Sporting KC" },
+              { id: "us-stl", name: "St. Louis City" },
+              { id: "us-tor", name: "Toronto FC" },
+              { id: "us-van", name: "Vancouver Whitecaps" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "South America",
+    slug: "south-america",
+    nations: [
+      {
+        name: "Brazil",
+        code: "BR",
+        leagues: [
+          {
+            id: "BRASILEIRAO",
+            name: "Brasileirão Série A",
+            teams: [
+              { id: "br-cap", name: "Athletico Paranaense" },
+              { id: "br-cam", name: "Atlético Mineiro" },
+              { id: "br-bah", name: "Bahia" },
+              { id: "br-bot", name: "Botafogo" },
+              { id: "br-cor", name: "Corinthians" },
+              { id: "br-cri", name: "Criciúma" },
+              { id: "br-cru", name: "Cruzeiro" },
+              { id: "br-cui", name: "Cuiabá" },
+              { id: "br-fla", name: "Flamengo" },
+              { id: "br-flu", name: "Fluminense" },
+              { id: "br-for", name: "Fortaleza" },
+              { id: "br-gre", name: "Grêmio" },
+              { id: "br-int", name: "Internacional" },
+              { id: "br-juv", name: "Juventude" },
+              { id: "br-pal", name: "Palmeiras" },
+              { id: "br-bgb", name: "Bragantino" },
+              { id: "br-sao", name: "São Paulo" },
+              { id: "br-vas", name: "Vasco da Gama" },
+              { id: "br-vit", name: "Vitória" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Argentina",
+        code: "AR",
+        leagues: [
+          {
+            id: "PRIMERA_ARG",
+            name: "Liga Profesional",
+            teams: [
+              { id: "ar-arg", name: "Argentinos Jrs" },
+              { id: "ar-atl", name: "Atlético Tucumán" },
+              { id: "ar-ban", name: "Banfield" },
+              { id: "ar-bar", name: "Barracas Central" },
+              { id: "ar-bel", name: "Belgrano" },
+              { id: "ar-boc", name: "Boca Juniors" },
+              { id: "ar-cco", name: "Central Córdoba" },
+              { id: "ar-def", name: "Defensa y Justicia" },
+              { id: "ar-est", name: "Estudiantes" },
+              { id: "ar-gim", name: "Gimnasia" },
+              { id: "ar-god", name: "Godoy Cruz" },
+              { id: "ar-hur", name: "Huracán" },
+              { id: "ar-ind", name: "Independiente" },
+              { id: "ar-riv", name: "Ind. Rivadavia" },
+              { id: "ar-ins", name: "Instituto" },
+              { id: "ar-lan", name: "Lanús" },
+              { id: "ar-new", name: "Newell's" },
+              { id: "ar-pla", name: "Platense" },
+              { id: "ar-rac", name: "Racing Club" },
+              { id: "ar-riv", name: "River Plate" },
+              { id: "ar-ros", name: "Rosario Central" },
+              { id: "ar-slo", name: "San Lorenzo" },
+              { id: "ar-sar", name: "Sarmiento" },
+              { id: "ar-tal", name: "Talleres" },
+              { id: "ar-tig", name: "Tigre" },
+              { id: "ar-uni", name: "Unión" },
+              { id: "ar-vel", name: "Vélez Sarsfield" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Asia",
+    slug: "asia",
+    nations: [
+      {
+        name: "Saudi Arabia",
+        code: "SA",
+        leagues: [
+          {
+            id: "RSL",
+            name: "Roshn Saudi League",
+            teams: [
+              { id: "sa-abh", name: "Abha" },
+              { id: "sa-ahl", name: "Al-Ahli" },
+              { id: "sa-ett", name: "Al-Ettifaq" },
+              { id: "sa-fat", name: "Al-Fateh" },
+              { id: "sa-fay", name: "Al-Fayha" },
+              { id: "sa-haz", name: "Al-Hazem" },
+              { id: "sa-hil", name: "Al-Hilal" },
+              { id: "sa-itt", name: "Al-Ittihad" },
+              { id: "sa-khl", name: "Al-Khaleej" },
+              { id: "sa-nas", name: "Al-Nassr" },
+              { id: "sa-okh", name: "Al-Okhdood" },
+              { id: "sa-rae", name: "Al-Raed" },
+              { id: "sa-riy", name: "Al-Riyadh" },
+              { id: "sa-sha", name: "Al-Shabab" },
+              { id: "sa-taa", name: "Al-Taawoun" },
+              { id: "sa-tai", name: "Al-Tai" },
+              { id: "sa-weh", name: "Al-Wehda" },
+              { id: "sa-dam", name: "Damac" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "South Korea",
+        code: "KR",
+        leagues: [
+          {
+            id: "KLEAGUE",
+            name: "K League 1",
+            teams: [
+              { id: "kr-dae", name: "Daegu FC" },
+              { id: "kr-dha", name: "Daejeon Hana" },
+              { id: "kr-gan", name: "Gangwon FC" },
+              { id: "kr-gim", name: "Gimcheon Sangmu" },
+              { id: "kr-gwa", name: "Gwangju FC" },
+              { id: "kr-inc", name: "Incheon United" },
+              { id: "kr-jju", name: "Jeju United" },
+              { id: "kr-jhm", name: "Jeonbuk Hyundai" },
+              { id: "kr-poh", name: "Pohang Steelers" },
+              { id: "kr-seo", name: "FC Seoul" },
+              { id: "kr-suw", name: "Suwon FC" },
+              { id: "kr-uls", name: "Ulsan HD" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Africa",
+    slug: "africa",
+    nations: [
+      {
+        name: "Egypt",
+        code: "EG",
+        leagues: [
+          {
+            id: "EPL_EG",
+            name: "Egyptian Premier League",
+            teams: [
+              { id: "eg-ahl", name: "Al Ahly" },
+              { id: "eg-zam", name: "Zamalek" },
+              { id: "eg-pyr", name: "Pyramids FC" },
+              { id: "eg-fut", name: "Future FC" },
+              { id: "eg-mas", name: "Al Masry" },
+              { id: "eg-smo", name: "Smouha" },
+              { id: "eg-itt", name: "Al Ittihad" },
+              { id: "eg-far", name: "Pharco FC" },
+              { id: "eg-enb", name: "ENPPI" },
+              { id: "eg-cer", name: "Ceramica Cleopatra" },
+              { id: "eg-ism", name: "Ismaily" },
+              { id: "eg-ban", name: "National Bank" },
+              { id: "eg-tal", name: "El Gaish" },
+              { id: "eg-ara", name: "Arab Contractors" },
+              { id: "eg-gou", name: "El Gouna" },
+              { id: "eg-bal", name: "Baladiyat" },
+              { id: "eg-zed", name: "ZED FC" },
+              { id: "eg-dak", name: "El Dakhleya" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Oceania",
+    slug: "oceania",
+    nations: [
+      {
+        name: "Australia",
+        code: "AU",
+        leagues: [
+          {
+            id: "ALEAGUE",
+            name: "A-League Men",
+            teams: [
+              { id: "au-ade", name: "Adelaide United" },
+              { id: "au-bri", name: "Brisbane Roar" },
+              { id: "au-cen", name: "Central Coast Mariners" },
+              { id: "au-mac", name: "Macarthur FC" },
+              { id: "au-mel-c", name: "Melbourne City" },
+              { id: "au-mel-v", name: "Melbourne Victory" },
+              { id: "au-new", name: "Newcastle Jets" },
+              { id: "au-per", name: "Perth Glory" },
+              { id: "au-syd", name: "Sydney FC" },
+              { id: "au-wel", name: "Wellington Phoenix" },
+              { id: "au-wes", name: "Western United" },
+              { id: "au-wsw", name: "Western Sydney Wanderers" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];

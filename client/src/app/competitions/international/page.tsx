@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Globe } from "lucide-react";
 
+import { LeagueLogo } from "@/components/ui/league-logo";
 import { getCompetitionLogo } from "@/lib/assets";
 
 const COMPETITIONS = [
   { id: "WC", name: "FIFA World Cup", region: "Global", teams: 48, next: "2026" },
+  { id: "EURO", name: "UEFA Euro", region: "Europe", teams: 24, next: "2024" },
   { id: "UCL", name: "UEFA Champions League", region: "Europe", teams: 36, next: "2025" },
-  { id: "LALIGA", name: "La Liga", region: "Spain", teams: 20, next: "2025" },
-  { id: "SERIEA", name: "Serie A", region: "Italy", teams: 20, next: "2025" },
+  { id: "UEL", name: "UEFA Europa League", region: "Europe", teams: 36, next: "2025" },
+  { id: "UECL", name: "UEFA Conference League", region: "Europe", teams: 36, next: "2025" },
 ];
 
 export default function InternationalPage() {
@@ -39,9 +41,12 @@ export default function InternationalPage() {
                 transition={{ delay: i * 0.1 }}
               >
                   <Card className="p-6 bg-surface border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
-                      <div className="h-12 w-12 mb-4 bg-white/5 rounded-lg flex items-center justify-center p-2">
-                        <img src={getCompetitionLogo(comp.id)!} alt={comp.name} className="h-full w-full object-contain" />
-                      </div>
+                      <LeagueLogo 
+                        src={getCompetitionLogo(comp.id)} 
+                        name={comp.name} 
+                        size="md"
+                        className="mb-4 bg-white/5 rounded-lg p-2"
+                      />
                       <h3 className="text-xl font-bold text-white group-hover:text-blue-500 transition-colors">{comp.name}</h3>
                       <p className="text-sm text-muted-foreground mt-1">{comp.region}</p>
                       

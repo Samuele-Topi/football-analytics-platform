@@ -2,35 +2,16 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Globe, Users, ArrowRight, Trophy, Star, Activity, TrendingUp, Calendar } from "lucide-react";
+import { Globe, Users, ArrowRight, Trophy, Star, Activity, TrendingUp, Calendar, ArrowLeft } from "lucide-react";
 import { getPlayerPhoto, getTeamLogo, getCompetitionLogo, getCountryFlag } from "@/lib/assets";
+import { WORLD_DATA, Continent, Nation, League, Team } from "@/lib/world-data";
+import { TeamLogo } from "@/components/ui/team-logo";
+import { LeagueLogo } from "@/components/ui/league-logo";
 
-// Mock Data Structure with IDs
-const NATIONS = [
-    { name: "England", code: "GB-ENG" },
-    { name: "Spain", code: "ES" },
-    { name: "Germany", code: "DE" },
-    { name: "Italy", code: "IT" },
-    { name: "France", code: "FR" },
-    { name: "Brazil", code: "BR" },
-    { name: "Argentina", code: "AR" }
-];
-const LEAGUES = [
-    { name: "Premier League", id: "PL" },
-    { name: "La Liga", id: "LALIGA" },
-    { name: "Serie A", id: "SERIEA" },
-    { name: "Bundesliga", id: "UCL" }, // Mocking with UCL if ID missing
-];
-const TEAMS = [
-    { name: "Man City", id: 43 },
-    { name: "Arsenal", id: 1 },
-    { name: "Liverpool", id: 8 },
-    { name: "Real Madrid", id: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
-];
 const SQUADS = ["First Team", "U23", "U18", "Women's Team"];
 const PLAYERS = [
   { id: 110633, name: "Erling Haaland", pos: "ST", age: 23, val: "€180M", natCode: "NO", nationality: "Norway" },
@@ -41,6 +22,7 @@ const PLAYERS = [
 
 export default function WorldBrowser() {
   const params = useParams();
+  const router = useRouter();
   const slug = params.slug as string[];
   const depth = slug?.length || 0;
 
@@ -50,12 +32,38 @@ export default function WorldBrowser() {
     href: `/world/${slug.slice(0, index + 1).join('/')}`,
   }));
 
+  // Helper to find data based on slug
+  const getContinent = () => WORLD_DATA.find(c => c.name.toLowerCase() === decodeURIComponent(slug[0] || "").toLowerCase());
+  const getNation = (continent: Continent) => continent.nations.find(n => n.name.toLowerCase() === decodeURIComponent(slug[1] || "").toLowerCase());
+  const getLeague = (nation: Nation) => nation.leagues.find(l => l.name.toLowerCase() === decodeURIComponent(slug[2] || "").toLowerCase());
+  const getTeam = (league: League) => league.teams.find(t => t.name.toLowerCase() === decodeURIComponent(slug[3] || "").toLowerCase());
+
+  const handleBack = () => {
+    // If at depth 1 (Continent), go back to /world (root of this feature)
+    if (depth === 1) {
+        router.push('/world');
+    } else {
+        // Go back one level in the hierarchy
+        const parentPath = `/world/${slug.slice(0, depth - 1).join('/')}`;
+        router.push(parentPath);
+    }
+  };
+
+
   const renderContent = () => {
+    // 0. World View (All Continents) - Not strictly depth 0 as page is [...slug], but handled if slug is empty
+    // However, [...slug] requires at least one segment usually, but if /world is root, we need to handle that in /world/page.tsx or here if optional catch-all.
+    // Assuming /world leads to a separate page or this handles it if we adjust routing.
+    // For now, let's assume depth starts at 1.
+
     // 1. Continent View -> Show Nations
     if (depth === 1) {
+      const continent = getContinent();
+      if (!continent) return <div>Continent not found</div>;
+
       return (
         <div className="grid md:grid-cols-3 gap-6">
-          {NATIONS.map((nation, i) => (
+          {continent.nations.map((nation, i) => (
             <Link key={nation.name} href={`/world/${slug[0]}/${nation.name}`}>
               <motion.div
                  initial={{ opacity: 0, scale: 0.95 }}
@@ -77,9 +85,13 @@ export default function WorldBrowser() {
 
     // 2. Nation View -> Show Leagues
     if (depth === 2) {
+      const continent = getContinent();
+      const nation = continent && getNation(continent);
+      if (!nation) return <div>Nation not found</div>;
+
       return (
         <div className="grid md:grid-cols-2 gap-6">
-          {LEAGUES.map((league, i) => (
+          {nation.leagues.map((league, i) => (
             <Link key={league.name} href={`/world/${slug[0]}/${slug[1]}/${league.name}`}>
                <motion.div
                  initial={{ opacity: 0, x: -20 }}
@@ -88,9 +100,12 @@ export default function WorldBrowser() {
               >
                 <Card className="p-6 bg-surface border-white/5 hover:border-primary/50 transition-all cursor-pointer flex justify-between items-center group">
                   <div className="flex items-center gap-4 text-white">
-                     <div className="h-12 w-12 flex items-center justify-center bg-white/5 rounded-lg p-2 border border-white/5 group-hover:border-primary/30 transition-colors">
-                        <img src={getCompetitionLogo(league.id)!} alt={league.name} className="h-full w-full object-contain" />
-                     </div>
+                     <LeagueLogo 
+                        src={getCompetitionLogo(league.id)} 
+                        name={league.name} 
+                        size="md"
+                        className="p-2 border border-white/5 group-hover:border-primary/30 transition-colors bg-white/5 rounded-lg"
+                     />
                      <div>
                         <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{league.name}</h3>
                         <p className="text-sm text-muted-foreground">Top Division</p>
@@ -105,29 +120,37 @@ export default function WorldBrowser() {
       );
     }
 
-    // 3. League/Competition View (Mockup)
+    // 3. League/Competition View
     if (depth === 3) {
+      const continent = getContinent();
+      const nation = continent && getNation(continent);
+      const league = nation && getLeague(nation);
+      if (!league) return <div>League not found</div>;
+
       return (
         <div className="space-y-8">
             <Card className="p-8 bg-gradient-to-br from-surface to-background border-white/5">
                 <div className="flex flex-col md:flex-row gap-8 items-center">
-                    <div className="h-32 w-32 bg-white/5 rounded-2xl flex items-center justify-center p-6 border border-white/10 shadow-2xl">
-                        <img src={getCompetitionLogo("PL")!} alt="League" className="h-full w-full object-contain" />
-                    </div>
+                    <LeagueLogo 
+                        src={getCompetitionLogo(league.id)} 
+                        name={league.name} 
+                        size="lg"
+                        className="p-6 border border-white/10 shadow-2xl bg-white/5 rounded-2xl"
+                    />
                     <div className="flex-1 text-center md:text-left">
                         <Badge className="bg-primary text-black mb-2">Tier 1 • Professional</Badge>
-                        <h2 className="text-4xl font-black text-white mb-2">{decodeURIComponent(slug[2])}</h2>
+                        <h2 className="text-4xl font-black text-white mb-2">{league.name}</h2>
                         <div className="flex flex-wrap gap-6 justify-center md:justify-start text-muted-foreground">
-                            <span className="flex items-center gap-2"><Globe className="h-4 w-4" /> {decodeURIComponent(slug[1])}</span>
-                            <span className="flex items-center gap-2"><Users className="h-4 w-4" /> 20 Teams</span>
-                            <span className="flex items-center gap-2"><Trophy className="h-4 w-4" /> Reigning: Man City</span>
+                            <span className="flex items-center gap-2"><Globe className="h-4 w-4" /> {nation!.name}</span>
+                            <span className="flex items-center gap-2"><Users className="h-4 w-4" /> {league.teams.length} Teams</span>
+                            <span className="flex items-center gap-2"><Trophy className="h-4 w-4" /> Reigning: {league.teams[0]?.name || "TBD"}</span>
                         </div>
                     </div>
                 </div>
             </Card>
 
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {TEAMS.map((team, i) => (
+                {league.teams.map((team, i) => (
                     <Link key={team.name} href={`/world/${slug[0]}/${slug[1]}/${slug[2]}/${team.name}`}>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -135,9 +158,12 @@ export default function WorldBrowser() {
                         transition={{ delay: i * 0.05 }}
                     >
                         <Card className="p-6 bg-surface border-white/5 hover:border-primary/50 transition-all cursor-pointer flex flex-col items-center gap-4 text-center group">
-                            <div className="h-24 w-24 rounded-full bg-white/5 flex items-center justify-center p-5 border border-white/5 group-hover:border-primary/30 transition-colors">
-                                <img src={getTeamLogo(team.id)!} alt={team.name} className="h-full w-full object-contain" />
-                            </div>
+                            <TeamLogo 
+                                src={getTeamLogo(team.name)} 
+                                name={team.name} 
+                                size="lg" 
+                                className="p-2 transition-transform group-hover:scale-110 duration-300"
+                            />
                             <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{team.name}</span>
                         </Card>
                     </motion.div>
@@ -150,15 +176,24 @@ export default function WorldBrowser() {
 
     // 4. Team View -> Show Squad Types
     if (depth === 4) {
+      const continent = getContinent();
+      const nation = continent && getNation(continent);
+      const league = nation && getLeague(nation);
+      const team = league && getTeam(league);
+      if (!team) return <div>Team not found</div>;
+
       return (
         <div className="space-y-8">
             <div className="flex items-center gap-6 p-6 rounded-2xl bg-white/5 border border-white/10">
-                <div className="h-20 w-20 bg-white/5 rounded-xl p-4">
-                    <img src={getTeamLogo(43)!} alt="Logo" className="h-full w-full object-contain" />
-                </div>
+                <TeamLogo 
+                    src={getTeamLogo(team.name)} 
+                    name={team.name} 
+                    size="lg" 
+                    className=""
+                />
                 <div>
-                    <h2 className="text-3xl font-bold text-white">{decodeURIComponent(slug[3])}</h2>
-                    <p className="text-muted-foreground">{decodeURIComponent(slug[2])} • {decodeURIComponent(slug[1])}</p>
+                    <h2 className="text-3xl font-bold text-white">{team.name}</h2>
+                    <p className="text-muted-foreground">{league!.name} • {nation!.name}</p>
                 </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -188,6 +223,8 @@ export default function WorldBrowser() {
 
     // 5. Squad View -> Show Players
     if (depth === 5) {
+       // Mock players for now, as we don't have 10,000 players in the mock data
+       // In a real app, this would fetch from the backend based on Team ID + Squad Type
       return (
         <div className="space-y-4">
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
@@ -224,10 +261,11 @@ export default function WorldBrowser() {
       );
     }
 
-    // 6. Hierarchical Player View (The Profile Page inside the hierarchy)
+    // 6. Hierarchical Player View
     if (depth === 6) {
         const playerName = decodeURIComponent(slug[5]);
         const player = PLAYERS.find(p => p.name === playerName) || PLAYERS[0];
+        // In real app, we'd find the player by slug
         
         return (
             <div className="space-y-8">
@@ -249,6 +287,7 @@ export default function WorldBrowser() {
                             <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
                                 <span className="flex items-center gap-2">
                                     <div className="h-4 w-4 bg-white/10 rounded-sm p-0.5">
+                                         {/* We'd need to pass the team ID down or fetch it */}
                                         <img src={getTeamLogo(43)!} alt="Team" className="h-full w-full object-contain" />
                                     </div>
                                     {decodeURIComponent(slug[3])}
@@ -331,7 +370,15 @@ export default function WorldBrowser() {
         animate={{ opacity: 1, y: 0 }}
         className="flex items-center gap-4 border-b border-white/10 pb-6"
       >
-        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+        <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={handleBack}
+            className="h-10 w-10 shrink-0 bg-surface border-white/10 hover:bg-white/5 mr-2"
+        >
+            <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
             <Globe className="h-8 w-8 text-primary" />
         </div>
         <div>

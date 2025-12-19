@@ -24,6 +24,11 @@
 *   **Version Control:** Git
 *   **Package Manager:** pnpm (Node), poetry/pip (Python)
 
+## Data Engineering & Acquisition
+*   **`soccerdata`:** A collection of wrappers for scraping football data from various websites.
+*   **`socceraction`:** Convert event stream data to the SPADL format and value game states (xT, VAEP).
+*   *(Note: These run in separate local environments to isolate dependencies.)*
+
 ## Quality Assurance & Testing
 *   **Frontend:** Vitest, React Testing Library
 *   **Backend:** Pytest

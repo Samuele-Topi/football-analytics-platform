@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2025-12-19
+
+### Added
+- **Landing Page:** New marketing/welcome page at root (`/`) with feature highlights.
+- **Dashboard:** Relocated "Command Center" to `/dashboard` route.
+- **User Profile:** New `/profile` page with stats and user details.
+- **TrendInsights:** New dashboard widget replacing the static chart, showing performance, market, and scouting trends.
+- **Filtering:** Robust filter panel in Scouting page (League, Position, Age, Potential).
+
+### Changed
+- **Match Analysis:** Refactored to "Post-Match" mode (Replay focus, no live indicators).
+- **Navigation:** Updated Navbar links and added Profile avatar.
+- **UI:** Added `link` variant to Button component.
+
 ## [1.3.1] - 2025-12-19
 
 ### Added

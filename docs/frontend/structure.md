@@ -4,14 +4,16 @@
 
 *   **`app/`**: Next.js App Router pages and layouts.
     *   `layout.tsx`: Root layout with `Navbar` and global font/theme settings.
-    *   `page.tsx`: Dashboard/Command Center with Market Value trends.
-    *   `match/page.tsx`: Live match control and tactical feed.
-    *   `scouting/page.tsx`: Talent identification and player search.
-    *   `settings/page.tsx`: System preferences and API configuration.
-    *   `globals.css`: Tailwind CSS configuration (v4) and "Command Center" theme variables.
+    *   `page.tsx`: **NEW** Landing Page / Welcome Screen.
+    *   `dashboard/page.tsx`: **MOVED** Command Center Dashboard.
+    *   `match/page.tsx`: Post-match analysis and replay.
+    *   `profile/page.tsx`: **NEW** User profile and stats.
+    *   `scouting/page.tsx`: Talent identification with advanced filters.
+    *   `settings/page.tsx`: System preferences.
+    *   `globals.css`: Tailwind CSS configuration (v4).
 
 *   **`components/`**: Reusable UI components.
-    *   `dashboard/`: `StatCard`, `MarketValueChart`.
+    *   `dashboard/`: `StatCard`, `TrendInsights`.
     *   `layout/`: `Navbar`.
     *   `match/`: `MatchPitch` (Tactical board).
     *   `ui/`: Generic UI primitives: `Badge`, `Button`, `Card`, `Input`, `Label`, `Switch`.

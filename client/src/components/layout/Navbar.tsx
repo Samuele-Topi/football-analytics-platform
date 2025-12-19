@@ -4,14 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Users, Activity, Settings, Globe } from "lucide-react";
+import { LayoutDashboard, Users, Activity, Settings, Globe, Star, Trophy, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { name: "Home", href: "/", icon: Globe }, // Replaced LayoutDashboard with Home/Globe for root
+  { name: "Home", href: "/", icon: Home },
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "World", href: "/world", icon: Globe },
+  { name: "International", href: "/competitions/international", icon: Trophy },
   { name: "Scouting", href: "/scouting", icon: Users },
-  { name: "Match Analysis", href: "/match", icon: Activity },
+  { name: "Shortlist", href: "/shortlist", icon: Star },
+  { name: "Match", href: "/match", icon: Activity },
 ];
 
 export function Navbar() {

@@ -2,23 +2,18 @@
 
 :root {
   /* Command Center Palette */
-  --background: #121212; /* Deep Charcoal */
+  --background: #0a0a0b;
   --foreground: #ededed;
-  
-  --surface: #1E1E1E; /* Slate Gray */
-  --surface-hover: #2C2C2C;
-  
-  --primary: #00FF41; /* Pitch Green */
+  --surface: #161618;
+  --surface-hover: #1c1c1f;
+  --primary: #00d2ff; /* Blue-blended Cyan */
   --primary-foreground: #000000;
-  
-  --secondary: #FFB000; /* Warning Amber */
-  --secondary-foreground: #000000;
-  
-  --danger: #FF3B30; /* Crimson */
-  --danger-foreground: #ffffff;
-
-  --muted: #2d2d2d;
+  --secondary: #3a86ff;
+  --danger: #ff3b30;
+  --muted: #888888;
   --muted-foreground: #a1a1aa;
+  --card: #161618;
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {

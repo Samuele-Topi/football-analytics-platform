@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.5] - 2025-12-19
+
+### Changed
+- **Visual Identity:** Shifted primary color from Pitch Green to "Electric Cyan" blue-blend.
+- **Navigation:** Updated Navbar with explicit links to World Browser, International Competitions, and Shortlist.
+- **Assets:** Updated Favicon and Avatar to match the new blue-cyan color palette.
+
 ## [1.3.4] - 2025-12-19
 
 ### Added

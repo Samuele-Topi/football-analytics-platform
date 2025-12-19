@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "football-analytics-platform-server"
-version = "1.4.0"
+version = "1.4.1"
 description = "Backend for Football Analytics Platform"
 authors = ["Admin <admin@example.com>"]
 readme = "README.md"

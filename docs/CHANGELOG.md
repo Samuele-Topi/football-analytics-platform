@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.4] - 2025-12-19
+
+### Added
+- **Global Database:** Implemented hierarchical browsing (`/world/[...slug]`) covering Continent > Nation > League > Team > Squad > Players.
+- **International:** New section (`/competitions/international`) for major tournaments.
+- **Shortlist:** Dedicated page (`/shortlist`) for tracking favorite players.
+- **Assets:** Generated custom SVG favicon and user avatar.
+
+### Changed
+- **Navigation:** Deep hierarchical routing structure replaces flat IDs for browsing.
+- **Tactical Feed:** "Replay" mode now correctly pauses when the match is paused.
+- **Profile:** User preferences are now fully interactive (Add/Remove tags).
+- **Player Page:** Removed "Make Offer" button as requested.
+
 ## [1.3.3] - 2025-12-19
 
 ### Added

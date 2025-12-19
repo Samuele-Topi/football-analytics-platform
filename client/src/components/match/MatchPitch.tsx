@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 
 interface MatchPitchProps {
   mode?: "replay" | "heatmap" | "passnetwork" | "shots";
+  isPlaying?: boolean;
 }
 
-export function MatchPitch({ mode = "replay" }: MatchPitchProps) {
+export function MatchPitch({ mode = "replay", isPlaying = false }: MatchPitchProps) {
   return (
     <div className="relative aspect-[105/68] w-full bg-[#1a2c1d] overflow-hidden rounded-lg border border-white/10 shadow-inner">
       {/* Field Markings */}
@@ -29,7 +30,7 @@ export function MatchPitch({ mode = "replay" }: MatchPitchProps) {
                 left: `${20 + Math.random() * 30}%`, 
                 top: `${10 + Math.random() * 80}%` 
               }}
-              animate={{
+              animate={isPlaying ? {
                 left: [
                   `${20 + Math.random() * 30}%`, 
                   `${20 + Math.random() * 30}%`, 
@@ -40,7 +41,7 @@ export function MatchPitch({ mode = "replay" }: MatchPitchProps) {
                   `${10 + Math.random() * 80}%`, 
                   `${10 + Math.random() * 80}%`
                 ],
-              }}
+              } : {}}
               transition={{
                 duration: 5 + Math.random() * 5,
                 repeat: Infinity,
@@ -58,7 +59,7 @@ export function MatchPitch({ mode = "replay" }: MatchPitchProps) {
                 right: `${20 + Math.random() * 30}%`, 
                 top: `${10 + Math.random() * 80}%` 
               }}
-              animate={{
+              animate={isPlaying ? {
                 right: [
                   `${20 + Math.random() * 30}%`, 
                   `${20 + Math.random() * 30}%`, 
@@ -69,7 +70,7 @@ export function MatchPitch({ mode = "replay" }: MatchPitchProps) {
                   `${10 + Math.random() * 80}%`, 
                   `${10 + Math.random() * 80}%`
                 ],
-              }}
+              } : {}}
               transition={{
                 duration: 5 + Math.random() * 5,
                 repeat: Infinity,

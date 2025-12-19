@@ -60,9 +60,6 @@ export default function PlayerProfile() {
           <Button variant="outline" className="gap-2">
             <Star className="h-4 w-4" /> Shortlist
           </Button>
-          <Button className="gap-2">
-            <DollarSign className="h-4 w-4" /> Make Offer
-          </Button>
         </div>
       </motion.div>
 

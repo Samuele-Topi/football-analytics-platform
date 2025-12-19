@@ -1,12 +1,30 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { User, Mail, Shield, Award, Calendar, LogOut, Activity } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { User, Mail, Shield, Award, Calendar, LogOut, Activity, X, Plus } from "lucide-react";
 
 export default function ProfilePage() {
+  const [preferences, setPreferences] = useState(["Premier League", "La Liga", "U21 Talents", "Left-Footed CBs", "High xG Strikers"]);
+  const [newTag, setNewTag] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+
+  const removePreference = (tag: string) => {
+    setPreferences(preferences.filter(p => p !== tag));
+  };
+
+  const addPreference = () => {
+    if (newTag.trim() && !preferences.includes(newTag.trim())) {
+      setPreferences([...preferences, newTag.trim()]);
+      setNewTag("");
+      setIsAdding(false);
+    }
+  };
+
   return (
     <div className="container mx-auto p-6 space-y-8 max-w-4xl">
       <motion.div
@@ -97,13 +115,38 @@ export default function ProfilePage() {
               <CardTitle>Saved Preferences</CardTitle>
           </CardHeader>
           <CardContent>
-              <div className="flex flex-wrap gap-2">
-                  {["Premier League", "La Liga", "U21 Talents", "Left-Footed CBs", "High xG Strikers"].map((tag) => (
-                      <Badge key={tag} variant="secondary" className="bg-white/10 hover:bg-white/20 cursor-pointer">
+              <div className="flex flex-wrap gap-2 items-center">
+                  {preferences.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="bg-white/10 hover:bg-white/20 pl-3 pr-1 py-1 flex items-center gap-2">
                           {tag}
+                          <button onClick={() => removePreference(tag)} className="hover:text-red-400 transition-colors">
+                              <X className="h-3 w-3" />
+                          </button>
                       </Badge>
                   ))}
-                  <Button variant="ghost" size="sm" className="h-6 text-xs text-primary">+ Add New</Button>
+                  
+                  {isAdding ? (
+                      <div className="flex items-center gap-2">
+                          <Input 
+                              autoFocus
+                              value={newTag} 
+                              onChange={(e) => setNewTag(e.target.value)}
+                              className="h-7 w-32 text-xs" 
+                              placeholder="New tag..."
+                              onKeyDown={(e) => {
+                                  if (e.key === 'Enter') addPreference();
+                                  if (e.key === 'Escape') setIsAdding(false);
+                              }}
+                          />
+                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={addPreference}>
+                              <Plus className="h-4 w-4" />
+                          </Button>
+                      </div>
+                  ) : (
+                      <Button variant="ghost" size="sm" className="h-6 text-xs text-primary gap-1" onClick={() => setIsAdding(true)}>
+                          <Plus className="h-3 w-3" /> Add New
+                      </Button>
+                  )}
               </div>
           </CardContent>
       </Card>

@@ -126,7 +126,7 @@ export default function MatchPage() {
                 </div>
              </div>
              <div className="relative flex-1 p-6 flex items-center justify-center bg-black/20">
-                <MatchPitch mode={viewMode} />
+                <MatchPitch mode={viewMode} isPlaying={isPlaying} />
              </div>
              {/* Timeline Scrubber */}
              <div className="p-4 bg-surface border-t border-white/5">

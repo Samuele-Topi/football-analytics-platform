@@ -1,4 +1,5 @@
 import TEAM_LOGOS from './team_logos.json';
+import { WORLD_DATA } from './world-data';
 
 /**
  * Utility to manage external assets (player photos, team logos).
@@ -6,6 +7,19 @@ import TEAM_LOGOS from './team_logos.json';
  */
 
 export const ENABLE_OFFICIAL_ASSETS = true;
+
+// Build a map of Team ID -> Team Name for easier lookup
+const TEAM_ID_TO_NAME: Record<string | number, string> = {};
+
+WORLD_DATA.forEach(continent => {
+  continent.nations.forEach(nation => {
+    nation.leagues.forEach(league => {
+      league.teams.forEach(team => {
+        TEAM_ID_TO_NAME[team.id] = team.name;
+      });
+    });
+  });
+});
 
 const ASSET_SOURCES = {
   // Premier League Official CDN
@@ -66,17 +80,23 @@ export function getTeamLogo(id?: string | number) {
     return id;
   }
   
-  // Check our manual JSON map first (using the ID as the key, or if ID is number, look for name match?)
-  // Since our JSON keys are team names, we should ideally pass the name.
-  // But the interface receives ID.
-  // We can try to cast ID to string if it matches a key.
-  
+  // 1. Direct match by Name (if ID passed is actually the name)
   if (typeof id === "string" && (TEAM_LOGOS as Record<string, string>)[id]) {
       return (TEAM_LOGOS as Record<string, string>)[id];
   }
 
-  // Fallback to Premier League ID system if it's a number
-  return ASSET_SOURCES.team(id);
+  // 2. Lookup Name by ID, then get Logo
+  const name = TEAM_ID_TO_NAME[id];
+  if (name && (TEAM_LOGOS as Record<string, string>)[name]) {
+      return (TEAM_LOGOS as Record<string, string>)[name];
+  }
+
+  // 3. Fallback to Premier League ID system if it's a number (or string number)
+  if (!isNaN(Number(id))) {
+      return ASSET_SOURCES.team(id);
+  }
+
+  return null;
 }
 
 /**

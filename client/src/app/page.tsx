@@ -18,7 +18,7 @@ export default function LandingPage() {
         >
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
             <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
-            v1.3.8 Live
+            v1.3.9 Live
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white">
             The Future of <br />

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { User, Mail, Shield, Award, Calendar, LogOut, Activity, X, Plus } from "lucide-react";
+import { getTeamLogo } from "@/lib/assets";
 
 export default function ProfilePage() {
   const [preferences, setPreferences] = useState(["Premier League", "La Liga", "U21 Talents", "Left-Footed CBs", "High xG Strikers"]);
@@ -32,10 +33,14 @@ export default function ProfilePage() {
         animate={{ opacity: 1, y: 0 }}
         className="flex items-center gap-6 pb-6 border-b border-white/10"
       >
-        <div className="h-24 w-24 rounded-full bg-gradient-to-br from-primary to-purple-600 p-1">
-            <div className="h-full w-full rounded-full bg-surface border-4 border-black overflow-hidden relative">
-                 {/* Placeholder Avatar */}
-                 <User className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground" />
+        <div className="h-24 w-24 rounded-full bg-surface border-white/10 p-1 overflow-hidden flex-shrink-0">
+            <div className="h-full w-full rounded-full bg-background border-2 border-surface-hover overflow-hidden relative flex items-center justify-center">
+                 {/* Team Logo or Placeholder Avatar */}
+                 {getTeamLogo(43) ? (
+                    <img src={getTeamLogo(43)!} alt="Team Logo" className="w-16 h-16 object-contain" />
+                 ) : (
+                    <User className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground" />
+                 )}
             </div>
         </div>
         <div className="flex-1">

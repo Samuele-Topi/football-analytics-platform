@@ -1,7 +1,7 @@
 # ⚽ Football Analytics Platform
 
 ![Project Status](https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.3.8-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-1.3.9-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 > **Next-Generation Tactical Intelligence.**

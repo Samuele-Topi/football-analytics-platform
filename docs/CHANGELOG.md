@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.9] - 2025-12-19
+
+### Added
+- **Assets:** Implemented `client/src/lib/assets.ts` utility to fetch official player photos and team logos from external CDNs (Premier League).
+- **UI:** Updated Scouting and Profile pages to display official assets when available.
+
 ## [1.3.8] - 2025-12-19
 
 ### Fixed

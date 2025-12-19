@@ -21,9 +21,10 @@
 - [x] **State:** Interactive components with local state (Settings).
 - [x] **Charts:** Implement initial Recharts for market value trends.
 - [x] **Visualization:** Live tactical pitch visualization.
+- [x] **Assets:** Official player/team image utility implemented.
 
 ## 📝 Documentation
 - [x] **Master Data Dictionary:** Complete.
 - [x] **Archetypes:** Complete.
 - [x] **Frontend Structure:** Updated in `docs/frontend/structure.md`.
-- [x] **Changelog:** Updated to v1.3.8.
+- [x] **Changelog:** Updated to v1.3.9.

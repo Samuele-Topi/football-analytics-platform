@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { LayoutDashboard, Users, Activity, Settings, Globe, Star, Trophy, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getTeamLogo } from "@/lib/assets";
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
@@ -68,8 +69,12 @@ export function Navbar() {
                 </Button>
             </Link>
             <Link href="/profile">
-                <div className="h-8 w-8 rounded-full bg-surface border border-white/10 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors">
-                     <div className="h-full w-full bg-gradient-to-tr from-primary/20 to-purple-500/20" />
+                <div className="h-8 w-8 rounded-full bg-surface border border-white/10 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors flex items-center justify-center">
+                     {getTeamLogo(43) ? (
+                        <img src={getTeamLogo(43)!} alt="Team Logo" className="w-5 h-5 object-contain" />
+                     ) : (
+                        <div className="h-full w-full bg-gradient-to-tr from-primary/20 to-purple-500/20" />
+                     )}
                 </div>
             </Link>
         </div>

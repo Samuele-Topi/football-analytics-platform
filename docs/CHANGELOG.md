@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2025-12-19
+
+### Fixed
+- **Client Stability:** Disabled experimental React Compiler in `client/next.config.ts` to resolve build crashes and "eternal" compilation times on Node.js v25.
+- **Runtime Error:** Fixed `ReferenceError: React is not defined` in `MatchPitch.tsx` by adding missing React import.
+- **Dependencies:** Bumped project version to 1.3.8 across all configuration files.
+
 ## [1.3.7] - 2025-12-19
 
 ### Fixed

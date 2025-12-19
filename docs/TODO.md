@@ -1,12 +1,13 @@
 # 📋 Developer TODO List
 
-**Focus:** Phase 2 (Data Engine) & Phase 3 (Visualization)
+**Focus:** Phase 3 (Visualization) & Stability Refinement
 
 ## 🚨 Immediate Priorities
 - [x] **Scaffold Client:** Next.js initialized with Command Center aesthetic.
-- [ ] **Scaffold Server:** Initialize Poetry and FastAPI in `/server`.
-- [ ] **Environment:** Create `docker-compose.yml` for local DB/Redis.
-- [ ] **Tooling:** Configure `eslint`, `prettier`, and `ruff` (Python linter).
+- [x] **Scaffold Server:** Initialize Poetry and FastAPI in `/server`.
+- [x] **Environment:** Create `docker-compose.yml` for local DB/Redis.
+- [x] **Tooling:** Configure `eslint`, `prettier`, and `ruff` (Python linter).
+- [ ] **Background Services:** Setup PM2 for managing the Next.js server (Planned).
 
 ## 🛠️ Data Engineering Tasks
 - [ ] **Schema Implementation:** Create SQLAlchemy models based on the Data Dictionary.
@@ -25,4 +26,4 @@
 - [x] **Master Data Dictionary:** Complete.
 - [x] **Archetypes:** Complete.
 - [x] **Frontend Structure:** Updated in `docs/frontend/structure.md`.
-- [x] **Changelog:** Updated to v1.3.1.
+- [x] **Changelog:** Updated to v1.3.8.

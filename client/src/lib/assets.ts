@@ -1,4 +1,5 @@
 import TEAM_LOGOS from './team_logos.json';
+import COMPETITION_LOGOS from './competition_logos.json';
 import { WORLD_DATA } from './world-data';
 
 /**
@@ -26,27 +27,10 @@ const ASSET_SOURCES = {
   player: (id: string | number) => `https://resources.premierleague.com/premierleague/photos/players/250x250/p${id}.png`,
   team: (id: string | number) => `https://resources.premierleague.com/premierleague/badges/t${id}.svg`,
   
-  // Competition Logos (Premier League, Champions League, etc.)
+  // Competition Logos (SoFIFA via competition_logos.json)
   competition: (id: string) => {
-    const logos: Record<string, string> = {
-      "PL": "https://resources.premierleague.com/premierleague/competitions/static/pl-logo.png",
-      "UCL": "https://img.uefa.com/imgml/uefacom/ucl/2021/logos/logo_main_w.png",
-      "UEL": "https://upload.wikimedia.org/wikipedia/commons/3/3c/UEFA_Europa_League_logo.svg",
-      "UECL": "https://upload.wikimedia.org/wikipedia/commons/e/e5/UEFA_Conference_League_logo_%282024%29.svg",
-      "EURO": "https://upload.wikimedia.org/wikipedia/en/9/96/UEFA_Euro_2024_Logo.svg",
-      "SERIEA": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
-      "LALIGA": "https://assets.laliga.com/assets/public/logos/laliga-h-v.svg",
-      "BUNDESLIGA": "https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg",
-      "LIGUE1": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Ligue_1_McDonald%27s_logo.svg",
-      "MLS": "https://upload.wikimedia.org/wikipedia/commons/7/76/MLS_crest_logo_RGB_gradient.svg",
-      "BRASILEIRAO": "https://upload.wikimedia.org/wikipedia/pt/4/42/Campeonato_Brasileiro_S%C3%A9rie_A_logo.png",
-      "PRIMERA_ARG": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Liga_Profesional_de_F%C3%BAtbol_Argentino_-_Logo_2021.svg/1200px-Liga_Profesional_de_F%C3%BAtbol_Argentino_-_Logo_2021.svg.png",
-      "RSL": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Roshn_Saudi_League_Logo.svg/1200px-Roshn_Saudi_League_Logo.svg.png",
-      "KLEAGUE": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e0/K_League_1_logo.svg/1200px-K_League_1_logo.svg.png",
-      "EPL_EG": "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Egyptian_Premier_League_logo.svg/1200px-Egyptian_Premier_League_logo.svg.png",
-      "ALEAGUE": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/A-Leagues_Logo.svg/1200px-A-Leagues_Logo.svg.png",
-      "WC": "https://upload.wikimedia.org/wikipedia/commons/a/ab/FIFA_World_Cup_2022_logo.svg",
-    };
+    const logos = COMPETITION_LOGOS as Record<string, string>;
+    // Fallback manual map for any missing ones if needed, or defaults
     return logos[id] || "/file.svg";
   },
 

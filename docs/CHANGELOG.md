@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.7] - 2025-12-19
+
+### Fixed
+- **Backend:** Restored missing `server/app/main.py` entry point to fix ASGI app loading error.
+
 ## [1.3.6] - 2025-12-19
 
 ### Changed

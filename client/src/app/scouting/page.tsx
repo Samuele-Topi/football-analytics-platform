@@ -1,32 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Search, Filter, TrendingUp, TrendingDown, Minus, X, ChevronDown } from "lucide-react";
 
 // Mock Data
 const PLAYERS = [
-  { id: 1, name: "Lucas Silva", age: 19, position: "CM", team: "Santos FC", value: "€12.5M", potential: 92, trend: "up" },
-  { id: 2, name: "Matteo Ricci", age: 22, position: "CB", team: "Empoli", value: "€8.2M", potential: 85, trend: "up" },
-  { id: 3, name: "Jonas Wind", age: 24, position: "ST", team: "Wolfsburg", value: "€18.0M", potential: 84, trend: "neutral" },
-  { id: 4, name: "Kaelan O'Connor", age: 18, position: "LW", team: "Leeds Utd", value: "€3.5M", potential: 88, trend: "up" },
-  { id: 5, name: "Davi Luiz", age: 21, position: "CDM", team: "Flamengo", value: "€15.2M", potential: 89, trend: "down" },
-  { id: 6, name: "Erik Hansen", age: 20, position: "RB", team: "Copenhagen", value: "€5.8M", potential: 83, trend: "neutral" },
+  { id: 1, name: "Lucas Silva", age: 19, position: "CM", team: "Santos FC", value: "€12.5M", potential: 92, trend: "up", league: "Brasileirao" },
+  { id: 2, name: "Matteo Ricci", age: 22, position: "CB", team: "Empoli", value: "€8.2M", potential: 85, trend: "up", league: "Serie A" },
+  { id: 3, name: "Jonas Wind", age: 24, position: "ST", team: "Wolfsburg", value: "€18.0M", potential: 84, trend: "neutral", league: "Bundesliga" },
+  { id: 4, name: "Kaelan O'Connor", age: 18, position: "LW", team: "Leeds Utd", value: "€3.5M", potential: 88, trend: "up", league: "Championship" },
+  { id: 5, name: "Davi Luiz", age: 21, position: "CDM", team: "Flamengo", value: "€15.2M", potential: 89, trend: "down", league: "Brasileirao" },
+  { id: 6, name: "Erik Hansen", age: 20, position: "RB", team: "Copenhagen", value: "€5.8M", potential: 83, trend: "neutral", league: "Superliga" },
+  { id: 7, name: "Yusuf Demir", age: 21, position: "RW", team: "Basel", value: "€6.0M", potential: 84, trend: "down", league: "Super League" },
+  { id: 8, name: "Archie Gray", age: 18, position: "CM", team: "Leeds Utd", value: "€10.0M", potential: 90, trend: "up", league: "Championship" },
 ];
 
 export default function ScoutingPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+      position: "All",
+      minPotential: 0,
+      maxAge: 30,
+      league: "All"
+  });
 
-  const filteredPlayers = PLAYERS.filter((player) =>
-    player.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const uniqueLeagues = Array.from(new Set(PLAYERS.map(p => p.league)));
+  const uniquePositions = Array.from(new Set(PLAYERS.map(p => p.position)));
+
+  const filteredPlayers = PLAYERS.filter((player) => {
+    const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPosition = filters.position === "All" || player.position === filters.position;
+    const matchesAge = player.age <= filters.maxAge;
+    const matchesPotential = player.potential >= filters.minPotential;
+    const matchesLeague = filters.league === "All" || player.league === filters.league;
+
+    return matchesSearch && matchesPosition && matchesAge && matchesPotential && matchesLeague;
+  });
 
   return (
-    <div className="container mx-auto p-6 space-y-8">
+    <div className="container mx-auto p-6 space-y-8 min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -46,78 +66,164 @@ export default function ScoutingPage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="flex gap-4 items-center rounded-xl border border-white/5 bg-surface p-4"
+        className="space-y-4"
       >
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search players by name..."
-            className="pl-9 bg-background/50 border-transparent focus:border-primary/50 transition-all"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+        <div className="flex gap-4 items-center rounded-xl border border-white/5 bg-surface p-4">
+            <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+                placeholder="Search players by name..."
+                className="pl-9 bg-background/50 border-transparent focus:border-primary/50 transition-all"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            </div>
+            <Button 
+                variant={showFilters ? "default" : "outline"} 
+                className="gap-2"
+                onClick={() => setShowFilters(!showFilters)}
+            >
+            <Filter className="h-4 w-4" />
+            Filters
+            {showFilters ? <ChevronDown className="h-4 w-4 rotate-180" /> : <ChevronDown className="h-4 w-4" />}
+            </Button>
         </div>
-        <Button variant="outline" className="gap-2">
-          <Filter className="h-4 w-4" />
-          Filters
-        </Button>
+
+        {/* Expandable Filter Panel */}
+        <AnimatePresence>
+            {showFilters && (
+                <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                >
+                    <div className="rounded-xl border border-white/5 bg-surface/50 p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="space-y-2">
+                            <Label>Position</Label>
+                            <select 
+                                className="w-full bg-background border border-white/10 rounded-md h-10 px-3 text-sm text-white focus:outline-none focus:border-primary/50"
+                                value={filters.position}
+                                onChange={(e) => setFilters({...filters, position: e.target.value})}
+                            >
+                                <option value="All">All Positions</option>
+                                {uniquePositions.map(p => <option key={p} value={p}>{p}</option>)}
+                            </select>
+                        </div>
+                        <div className="space-y-2">
+                            <Label>League</Label>
+                            <select 
+                                className="w-full bg-background border border-white/10 rounded-md h-10 px-3 text-sm text-white focus:outline-none focus:border-primary/50"
+                                value={filters.league}
+                                onChange={(e) => setFilters({...filters, league: e.target.value})}
+                            >
+                                <option value="All">All Leagues</option>
+                                {uniqueLeagues.map(l => <option key={l} value={l}>{l}</option>)}
+                            </select>
+                        </div>
+                         <div className="space-y-2">
+                            <div className="flex justify-between">
+                                <Label>Max Age</Label>
+                                <span className="text-xs text-primary font-bold">{filters.maxAge}</span>
+                            </div>
+                            <input 
+                                type="range" 
+                                min="16" 
+                                max="40" 
+                                className="w-full accent-primary h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                value={filters.maxAge}
+                                onChange={(e) => setFilters({...filters, maxAge: parseInt(e.target.value)})}
+                            />
+                        </div>
+                         <div className="space-y-2">
+                            <div className="flex justify-between">
+                                <Label>Min Potential</Label>
+                                <span className="text-xs text-primary font-bold">{filters.minPotential}</span>
+                            </div>
+                            <input 
+                                type="range" 
+                                min="50" 
+                                max="99" 
+                                className="w-full accent-primary h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                                value={filters.minPotential}
+                                onChange={(e) => setFilters({...filters, minPotential: parseInt(e.target.value)})}
+                            />
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
       </motion.div>
 
       {/* Player Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredPlayers.map((player, index) => (
-          <motion.div
-            key={player.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-          >
-            <Card className="group cursor-pointer hover:border-primary/50 transition-all hover:bg-surface-hover">
-              <div className="p-6 space-y-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors">
-                      {player.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{player.team}</p>
-                  </div>
-                  <Badge variant="outline" className="bg-white/5">
-                    {player.position}
-                  </Badge>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 py-2">
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Age</p>
-                    <p className="text-sm font-semibold text-white">{player.age}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Potential</p>
-                    <p className="text-sm font-semibold text-primary">{player.potential}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Value</p>
-                    <p className="text-sm font-semibold text-white">{player.value}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">Trend</p>
-                    <div className="flex items-center gap-1">
-                      {player.trend === "up" && <TrendingUp className="h-3 w-3 text-primary" />}
-                      {player.trend === "down" && <TrendingDown className="h-3 w-3 text-danger" />}
-                      {player.trend === "neutral" && <Minus className="h-3 w-3 text-muted-foreground" />}
+        {filteredPlayers.length > 0 ? (
+            filteredPlayers.map((player, index) => (
+            <motion.div
+                key={player.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+            >
+                <Card className="group cursor-pointer hover:border-primary/50 transition-all hover:bg-surface-hover">
+                <div className="p-6 space-y-4">
+                    <div className="flex justify-between items-start">
+                    <div>
+                        <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors">
+                        {player.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">{player.team}</p>
                     </div>
-                  </div>
+                    <Badge variant="outline" className="bg-white/5">
+                        {player.position}
+                    </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 py-2">
+                    <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Age</p>
+                        <p className="text-sm font-semibold text-white">{player.age}</p>
+                    </div>
+                    <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Potential</p>
+                        <p className="text-sm font-semibold text-primary">{player.potential}</p>
+                    </div>
+                    <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Value</p>
+                        <p className="text-sm font-semibold text-white">{player.value}</p>
+                    </div>
+                    <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Trend</p>
+                        <div className="flex items-center gap-1">
+                        {player.trend === "up" && <TrendingUp className="h-3 w-3 text-primary" />}
+                        {player.trend === "down" && <TrendingDown className="h-3 w-3 text-danger" />}
+                        {player.trend === "neutral" && <Minus className="h-3 w-3 text-muted-foreground" />}
+                        </div>
+                    </div>
+                    </div>
                 </div>
-              </div>
-              <div className="h-1 bg-white/5 w-full">
-                <div 
-                  className="h-full bg-primary transition-all duration-500" 
-                  style={{ width: `${player.potential}%` }} 
-                />
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+                <div className="h-1 bg-white/5 w-full">
+                    <div 
+                    className="h-full bg-primary transition-all duration-500" 
+                    style={{ width: `${player.potential}%` }} 
+                    />
+                </div>
+                </Card>
+            </motion.div>
+            ))
+        ) : (
+             <div className="col-span-full py-12 text-center text-muted-foreground">
+                <Search className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                <p>No players found matching your criteria.</p>
+                <Button 
+                    variant="link" 
+                    className="text-primary mt-2"
+                    onClick={() => setFilters({ position: "All", minPotential: 0, maxAge: 30, league: "All" })}
+                >
+                    Clear Filters
+                </Button>
+            </div>
+        )}
       </div>
     </div>
   );

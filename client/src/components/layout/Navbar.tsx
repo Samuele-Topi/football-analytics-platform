@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Users, Activity, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Activity, Settings, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Home", href: "/", icon: Globe }, // Replaced LayoutDashboard with Home/Globe for root
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Scouting", href: "/scouting", icon: Users },
   { name: "Match Analysis", href: "/match", icon: Activity },
-  { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function Navbar() {
@@ -58,7 +59,16 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="h-8 w-8 rounded-full bg-surface border border-white/10" />
+            <Link href="/settings">
+                <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-white">
+                    <Settings className="h-5 w-5" />
+                </Button>
+            </Link>
+            <Link href="/profile">
+                <div className="h-8 w-8 rounded-full bg-surface border border-white/10 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors">
+                     <div className="h-full w-full bg-gradient-to-tr from-primary/20 to-purple-500/20" />
+                </div>
+            </Link>
         </div>
       </div>
     </nav>

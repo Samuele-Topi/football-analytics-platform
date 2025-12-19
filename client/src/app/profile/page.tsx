@@ -6,17 +6,30 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { User, Mail, Shield, LogOut, Activity, X, Plus, Camera, RefreshCw } from "lucide-react";
+import { User, Mail, Shield, LogOut, Activity, X, Plus, Camera, RefreshCw, Upload } from "lucide-react";
 import { useUserStore } from "@/store/useUserStore";
+import { useRef } from "react";
 
 export default function ProfilePage() {
   const { profilePic, setProfilePic, resetProfilePic } = useUserStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [preferences, setPreferences] = useState(["Premier League", "La Liga", "U21 Talents", "Left-Footed CBs", "High xG Strikers"]);
   const [newTag, setNewTag] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
   const [picUrl, setPicUrl] = useState("");
   const [showPicInput, setShowPicInput] = useState(false);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setProfilePic(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+    }
+  };
 
   const removePreference = (tag: string) => {
     setPreferences(preferences.filter(p => p !== tag));
@@ -58,9 +71,24 @@ export default function ProfilePage() {
             <button 
                 onClick={() => setShowPicInput(!showPicInput)}
                 className="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-black text-black hover:scale-110 transition-transform shadow-lg"
+                title="Update via URL"
             >
                 <Camera className="h-4 w-4" />
             </button>
+            <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="absolute bottom-0 left-0 bg-surface p-1.5 rounded-full border-2 border-black text-white hover:scale-110 transition-transform shadow-lg"
+                title="Upload Image"
+            >
+                <Upload className="h-4 w-4" />
+            </button>
+            <input 
+                type="file" 
+                ref={fileInputRef} 
+                className="hidden" 
+                accept="image/*" 
+                onChange={handleFileUpload}
+            />
         </div>
         
         <div className="flex-1">
@@ -72,7 +100,7 @@ export default function ProfilePage() {
                             value={picUrl}
                             onChange={(e) => setPicUrl(e.target.value)}
                             placeholder="Image URL..." 
-                            className="h-8 w-48 text-xs"
+                            className="h-8 w-48 text-xs bg-black/40 border-white/10"
                         />
                         <Button size="sm" className="h-8" onClick={updatePic}>Set</Button>
                         <Button variant="ghost" size="icon" className="h-8 w-8" onClick={resetProfilePic} title="Reset to default">

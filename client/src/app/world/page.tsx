@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { Globe, ArrowRight } from "lucide-react";
+import { Globe, ArrowRight, Trophy } from "lucide-react";
 
 const CONTINENTS = [
     { name: "Europe", code: "EU" },
@@ -32,6 +32,23 @@ export default function WorldRoot() {
       </motion.div>
 
       <div className="grid md:grid-cols-3 gap-6">
+          <Link href="/competitions/international">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+              >
+                  <Card className="p-8 bg-blue-500/5 border-blue-500/10 hover:bg-blue-500/10 hover:border-blue-500/50 transition-all cursor-pointer flex items-center justify-between group">
+                      <div className="flex items-center gap-4">
+                          <div className="h-12 w-12 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-500/30 group-hover:border-blue-500/50 transition-colors">
+                            <Trophy className="h-6 w-6 text-blue-400" />
+                          </div>
+                          <span className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">International</span>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-white" />
+                  </Card>
+              </motion.div>
+          </Link>
+
           {CONTINENTS.map((cont, i) => (
               <Link key={cont.name} href={`/world/${cont.name}`}>
                   <motion.div

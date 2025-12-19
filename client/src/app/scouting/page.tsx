@@ -178,7 +178,7 @@ export default function ScoutingPage() {
                     <div className="p-6 space-y-4 flex-1">
                         <div className="flex justify-between items-start">
                         <div>
-                            <Link href={`/player/${player.id}`} className="font-bold text-lg text-white group-hover:text-primary transition-colors hover:underline">
+                            <Link href={`/world/Europe/England/Premier League/${player.team}/${player.name}`} className="font-bold text-lg text-white group-hover:text-primary transition-colors hover:underline">
                             {player.name}
                             </Link>
                             <p className="text-sm text-muted-foreground">{player.team}</p>

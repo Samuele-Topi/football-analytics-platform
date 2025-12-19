@@ -44,16 +44,18 @@ export default function ShortlistPage() {
            >
               <Card className="p-4 bg-surface border-white/5 hover:border-primary/50 transition-all flex items-center justify-between group">
                   <div className="flex items-center gap-6">
-                      <div className="h-16 w-16 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center">
+                      <div className="h-16 w-16 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center p-0">
                           <img src={getPlayerPhoto(player.id)} alt={player.name} className="h-full w-full object-cover" />
                       </div>
                       <div>
                           <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors">
-                            <Link href={`/player/${player.id}`}>{player.name}</Link>
+                            <Link href={`/world/Europe/England/Premier League/Man City/${player.name}`}>{player.name}</Link>
                           </h3>
                           <p className="text-sm text-muted-foreground flex items-center gap-2">
-                            <img src={getTeamLogo(player.teamId)!} alt="Team" className="h-3 w-3 object-contain" />
-                            {player.team} • {player.age} yo
+                            <div className="h-5 w-5 bg-white/10 rounded p-1 flex items-center justify-center">
+                                <img src={getTeamLogo(player.teamId)!} alt="Team" className="h-full w-full object-contain" />
+                            </div>
+                            {player.team} • <span className="text-primary font-medium">{player.position}</span> • {player.age} yo
                           </p>
                       </div>
                   </div>

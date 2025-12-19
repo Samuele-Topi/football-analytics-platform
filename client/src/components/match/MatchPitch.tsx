@@ -7,7 +7,61 @@ interface MatchPitchProps {
   isPlaying?: boolean;
 }
 
+interface PlayerAnimation {
+  id: string;
+  initial: { left?: string; top?: string; right?: string };
+  animate: { left?: string[]; top?: string[]; right?: string[] };
+  duration: number;
+}
+
 export function MatchPitch({ mode = "replay", isPlaying = false }: MatchPitchProps) {
+  const [homePlayers, setHomePlayers] = React.useState<PlayerAnimation[]>([]);
+  const [awayPlayers, setAwayPlayers] = React.useState<PlayerAnimation[]>([]);
+
+  React.useEffect(() => {
+    setHomePlayers([...Array(11)].map((_, i) => ({
+      id: `home-${i}`,
+      initial: {
+        left: `${20 + Math.random() * 30}%`,
+        top: `${10 + Math.random() * 80}%`
+      },
+      animate: {
+        left: [
+          `${20 + Math.random() * 30}%`,
+          `${20 + Math.random() * 30}%`,
+          `${20 + Math.random() * 30}%`
+        ],
+        top: [
+          `${10 + Math.random() * 80}%`,
+          `${10 + Math.random() * 80}%`,
+          `${10 + Math.random() * 80}%`
+        ]
+      },
+      duration: 5 + Math.random() * 5
+    })));
+
+    setAwayPlayers([...Array(11)].map((_, i) => ({
+      id: `away-${i}`,
+      initial: {
+        right: `${20 + Math.random() * 30}%`,
+        top: `${10 + Math.random() * 80}%`
+      },
+      animate: {
+        right: [
+          `${20 + Math.random() * 30}%`,
+          `${20 + Math.random() * 30}%`,
+          `${20 + Math.random() * 30}%`
+        ],
+        top: [
+          `${10 + Math.random() * 80}%`,
+          `${10 + Math.random() * 80}%`,
+          `${10 + Math.random() * 80}%`
+        ]
+      },
+      duration: 5 + Math.random() * 5
+    })));
+  }, []);
+
   return (
     <div className="relative aspect-[105/68] w-full bg-[#1a2c1d] overflow-hidden rounded-lg border border-white/10 shadow-inner">
       {/* Field Markings */}
@@ -22,28 +76,14 @@ export function MatchPitch({ mode = "replay", isPlaying = false }: MatchPitchPro
       {/* --- MODE: REPLAY (Moving Players) --- */}
       {mode === "replay" && (
         <>
-          {[...Array(11)].map((_, i) => (
+          {homePlayers.map((player) => (
             <motion.div
-              key={`home-${i}`}
+              key={player.id}
               className="absolute h-4 w-4 rounded-full bg-primary border border-black shadow-lg shadow-primary/20 cursor-pointer z-10"
-              initial={{ 
-                left: `${20 + Math.random() * 30}%`, 
-                top: `${10 + Math.random() * 80}%` 
-              }}
-              animate={isPlaying ? {
-                left: [
-                  `${20 + Math.random() * 30}%`, 
-                  `${20 + Math.random() * 30}%`, 
-                  `${20 + Math.random() * 30}%`
-                ],
-                top: [
-                  `${10 + Math.random() * 80}%`, 
-                  `${10 + Math.random() * 80}%`, 
-                  `${10 + Math.random() * 80}%`
-                ],
-              } : {}}
+              initial={player.initial}
+              animate={isPlaying ? player.animate : {}}
               transition={{
-                duration: 5 + Math.random() * 5,
+                duration: player.duration,
                 repeat: Infinity,
                 repeatType: "reverse",
                 ease: "easeInOut"
@@ -51,28 +91,14 @@ export function MatchPitch({ mode = "replay", isPlaying = false }: MatchPitchPro
             />
           ))}
 
-          {[...Array(11)].map((_, i) => (
+          {awayPlayers.map((player) => (
             <motion.div
-              key={`away-${i}`}
+              key={player.id}
               className="absolute h-4 w-4 rounded-full bg-danger border border-black shadow-lg shadow-danger/20 cursor-pointer z-10"
-              initial={{ 
-                right: `${20 + Math.random() * 30}%`, 
-                top: `${10 + Math.random() * 80}%` 
-              }}
-              animate={isPlaying ? {
-                right: [
-                  `${20 + Math.random() * 30}%`, 
-                  `${20 + Math.random() * 30}%`, 
-                  `${20 + Math.random() * 30}%`
-                ],
-                top: [
-                  `${10 + Math.random() * 80}%`, 
-                  `${10 + Math.random() * 80}%`, 
-                  `${10 + Math.random() * 80}%`
-                ],
-              } : {}}
+              initial={player.initial}
+              animate={isPlaying ? player.animate : {}}
               transition={{
-                duration: 5 + Math.random() * 5,
+                duration: player.duration,
                 repeat: Infinity,
                 repeatType: "reverse",
                 ease: "easeInOut"

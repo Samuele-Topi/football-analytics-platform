@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.6] - 2025-12-19
+
+### Changed
+- **Visual Identity:** Refined color palette to a professional "Blended Blue" theme.
+    - Background: Deep Night Blue (`#0B0F19`) instead of stark black.
+    - Primary: Soft Professional Blue (`#60A5FA`) instead of neon cyan.
+    - Surface: Cool Gray/Black (`#111827`) for better contrast blending.
+- **Assets:** Updated favicons and avatars to match the new professional theme.
+
 ## [1.3.5] - 2025-12-19
 
 ### Changed

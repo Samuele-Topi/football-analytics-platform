@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { MatchPitch } from "@/components/match/MatchPitch";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, BarChart2, Share2, Download, PlayCircle, Star, PauseCircle } from "lucide-react";
+import { Calendar, Clock, BarChart2, Download, PlayCircle, Star, PauseCircle } from "lucide-react";
 import Link from "next/link";
+import { getTeamLogo, getPlayerPhoto } from "@/lib/assets";
 
 type ViewMode = "replay" | "heatmap" | "passnetwork" | "shots";
 
@@ -43,8 +44,8 @@ export default function MatchPage() {
          <div className="p-6 grid grid-cols-1 md:grid-cols-3 items-center gap-6 text-center">
              {/* Home Team */}
              <div className="flex flex-col items-center gap-2">
-                 <div className="h-16 w-16 rounded-full bg-blue-500/20 flex items-center justify-center border-2 border-blue-500">
-                     <span className="text-2xl font-bold text-blue-500">MC</span>
+                 <div className="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center p-4">
+                     <img src={getTeamLogo(43)!} alt="Man City" className="h-full w-full object-contain" />
                  </div>
                  <h2 className="text-xl font-bold text-white">Man City</h2>
                  <Badge variant="outline" className="bg-blue-500/10 text-blue-500 border-blue-500/20">4-3-3</Badge>
@@ -64,8 +65,8 @@ export default function MatchPage() {
 
              {/* Away Team */}
              <div className="flex flex-col items-center gap-2">
-                 <div className="h-16 w-16 rounded-full bg-red-500/20 flex items-center justify-center border-2 border-red-500">
-                     <span className="text-2xl font-bold text-red-500">LIV</span>
+                 <div className="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center p-4">
+                     <img src={getTeamLogo(8)!} alt="Liverpool" className="h-full w-full object-contain" />
                  </div>
                  <h2 className="text-xl font-bold text-white">Liverpool</h2>
                  <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/20">4-2-3-1</Badge>
@@ -166,14 +167,15 @@ export default function MatchPage() {
                     <Star className="h-4 w-4 text-yellow-500" /> Man of the Match
                 </h3>
                 <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-full bg-white/10" />
+                    <div className="h-16 w-16 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center">
+                        <img src={getPlayerPhoto(61368)} alt="KDB" className="h-full w-full object-cover" />
+                    </div>
                     <div>
-                        <Link href="/player/1" className="font-bold text-white hover:text-primary transition-colors hover:underline">Kevin De Bruyne</Link>
+                        <Link href="/player/61368" className="font-bold text-white hover:text-primary transition-colors hover:underline">Kevin De Bruyne</Link>
                         <p className="text-xs text-muted-foreground">8.9 Rating • 1 Goal • 1 Assist</p>
                     </div>
                 </div>
             </Card>
-
             <Card className="p-4 bg-surface border-white/10">
                 <h3 className="text-sm font-bold text-white mb-4">Key Insights</h3>
                 <ul className="space-y-3">

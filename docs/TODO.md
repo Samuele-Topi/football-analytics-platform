@@ -18,13 +18,13 @@
 - [x] **Setup:** Tailwind CSS configured with custom palette (v4).
 - [x] **Component:** Basic `Layout` shell (Navbar) implemented.
 - [x] **Routing:** App Router structure established.
-- [x] **State:** Interactive components with local state (Settings).
+- [x] **State:** Global state management with Zustand (`useUserStore`).
 - [x] **Charts:** Implement initial Recharts for market value trends.
 - [x] **Visualization:** Live tactical pitch visualization.
-- [x] **Assets:** Official player/team image utility implemented.
+- [x] **Assets:** Official player/team image utility and integration.
 
 ## 📝 Documentation
 - [x] **Master Data Dictionary:** Complete.
 - [x] **Archetypes:** Complete.
 - [x] **Frontend Structure:** Updated in `docs/frontend/structure.md`.
-- [x] **Changelog:** Updated to v1.3.9.
+- [x] **Changelog:** Updated to v1.4.0.

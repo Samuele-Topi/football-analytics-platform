@@ -1,15 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { Globe, Trophy, ArrowRight } from "lucide-react";
+import { Globe } from "lucide-react";
+
+import { getCompetitionLogo } from "@/lib/assets";
 
 const COMPETITIONS = [
-  { id: "world-cup", name: "FIFA World Cup", region: "Global", teams: 48, next: "2026" },
-  { id: "euros", name: "UEFA Euro", region: "Europe", teams: 24, next: "2028" },
-  { id: "copa-america", name: "Copa América", region: "South America", teams: 16, next: "2028" },
-  { id: "afcon", name: "AFCON", region: "Africa", teams: 24, next: "2025" },
+  { id: "WC", name: "FIFA World Cup", region: "Global", teams: 48, next: "2026" },
+  { id: "UCL", name: "UEFA Champions League", region: "Europe", teams: 36, next: "2025" },
+  { id: "LALIGA", name: "La Liga", region: "Spain", teams: 20, next: "2025" },
+  { id: "SERIEA", name: "Serie A", region: "Italy", teams: 20, next: "2025" },
 ];
 
 export default function InternationalPage() {
@@ -24,8 +25,8 @@ export default function InternationalPage() {
             <Globe className="h-8 w-8 text-blue-500" />
         </div>
         <div>
-           <h1 className="text-3xl font-bold text-white">International Football</h1>
-           <p className="text-muted-foreground">Major tournaments and national team databases.</p>
+           <h1 className="text-3xl font-bold text-white">Major Competitions</h1>
+           <p className="text-muted-foreground">Global tournaments and league databases.</p>
         </div>
       </motion.div>
 
@@ -38,7 +39,9 @@ export default function InternationalPage() {
                 transition={{ delay: i * 0.1 }}
               >
                   <Card className="p-6 bg-surface border-white/5 hover:border-blue-500/50 transition-all cursor-pointer group">
-                      <Trophy className="h-8 w-8 text-yellow-500 mb-4" />
+                      <div className="h-12 w-12 mb-4 bg-white/5 rounded-lg flex items-center justify-center p-2">
+                        <img src={getCompetitionLogo(comp.id)!} alt={comp.name} className="h-full w-full object-contain" />
+                      </div>
                       <h3 className="text-xl font-bold text-white group-hover:text-blue-500 transition-colors">{comp.name}</h3>
                       <p className="text-sm text-muted-foreground mt-1">{comp.region}</p>
                       

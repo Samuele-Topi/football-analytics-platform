@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="Football Analytics Platform API",
     description="Backend API for the Football Analytics Platform",
-    version="1.3.9",
+    version="1.4.0",
 )
 
 # Configure CORS

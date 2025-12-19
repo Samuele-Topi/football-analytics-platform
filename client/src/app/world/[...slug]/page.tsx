@@ -5,19 +5,37 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Globe, MapPin, Trophy, Shield, Users, ArrowRight, User } from "lucide-react";
+import { Globe, Users, ArrowRight } from "lucide-react";
+import { getPlayerPhoto, getTeamLogo, getCompetitionLogo, getCountryFlag } from "@/lib/assets";
 
-// Mock Data Structure
-const CONTINENTS = ["Europe", "South America", "Asia", "Africa", "North America"];
-const NATIONS = ["England", "Spain", "Germany", "Italy", "France", "Brazil", "Argentina"];
-const LEAGUES = ["Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1"];
-const TEAMS = ["Man City", "Arsenal", "Liverpool", "Real Madrid", "Barcelona"];
+// Mock Data Structure with IDs
+const NATIONS = [
+    { name: "England", code: "GB-ENG" },
+    { name: "Spain", code: "ES" },
+    { name: "Germany", code: "DE" },
+    { name: "Italy", code: "IT" },
+    { name: "France", code: "FR" },
+    { name: "Brazil", code: "BR" },
+    { name: "Argentina", code: "AR" }
+];
+const LEAGUES = [
+    { name: "Premier League", id: "PL" },
+    { name: "La Liga", id: "LALIGA" },
+    { name: "Serie A", id: "SERIEA" },
+    { name: "Bundesliga", id: "UCL" }, // Mocking with UCL if ID missing
+];
+const TEAMS = [
+    { name: "Man City", id: 43 },
+    { name: "Arsenal", id: 1 },
+    { name: "Liverpool", id: 8 },
+    { name: "Real Madrid", id: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" },
+];
 const SQUADS = ["First Team", "U23", "U18", "Women's Team"];
 const PLAYERS = [
-  { name: "Erling Haaland", pos: "ST", age: 23, val: "€180M" },
-  { name: "Kevin De Bruyne", pos: "CM", age: 32, val: "€60M" },
-  { name: "Phil Foden", pos: "RW", age: 24, val: "€110M" },
-  { name: "Ruben Dias", pos: "CB", age: 26, val: "€80M" },
+  { id: 110633, name: "Erling Haaland", pos: "ST", age: 23, val: "€180M" },
+  { id: 61368, name: "Kevin De Bruyne", pos: "CM", age: 32, val: "€60M" },
+  { id: 209046, name: "Phil Foden", pos: "RW", age: 24, val: "€110M" },
+  { id: 110260, name: "Ruben Dias", pos: "CB", age: 26, val: "€80M" },
 ];
 
 export default function WorldBrowser() {
@@ -37,15 +55,15 @@ export default function WorldBrowser() {
       return (
         <div className="grid md:grid-cols-3 gap-6">
           {NATIONS.map((nation, i) => (
-            <Link key={nation} href={`/world/${slug[0]}/${nation}`}>
+            <Link key={nation.name} href={`/world/${slug[0]}/${nation.name}`}>
               <motion.div
                  initial={{ opacity: 0, scale: 0.95 }}
                  animate={{ opacity: 1, scale: 1 }}
                  transition={{ delay: i * 0.05 }}
               >
-                <Card className="p-6 bg-surface border-white/5 hover:bg-white/5 transition-all cursor-pointer flex items-center gap-4">
-                  <MapPin className="h-6 w-6 text-primary" />
-                  <span className="text-lg font-bold text-white">{nation}</span>
+                <Card className="p-6 bg-surface border-white/5 hover:border-primary/50 transition-all cursor-pointer flex items-center gap-4 group text-white">
+                  <img src={getCountryFlag(nation.code)!} alt={nation.name} className="h-6 w-10 object-cover rounded-sm" />
+                  <span className="text-lg font-bold group-hover:text-primary transition-colors">{nation.name}</span>
                 </Card>
               </motion.div>
             </Link>
@@ -59,17 +77,19 @@ export default function WorldBrowser() {
       return (
         <div className="grid md:grid-cols-2 gap-6">
           {LEAGUES.map((league, i) => (
-            <Link key={league} href={`/world/${slug[0]}/${slug[1]}/${league}`}>
+            <Link key={league.name} href={`/world/${slug[0]}/${slug[1]}/${league.name}`}>
                <motion.div
                  initial={{ opacity: 0, x: -20 }}
                  animate={{ opacity: 1, x: 0 }}
                  transition={{ delay: i * 0.05 }}
               >
                 <Card className="p-6 bg-surface border-white/5 hover:border-primary/50 transition-all cursor-pointer flex justify-between items-center group">
-                  <div className="flex items-center gap-4">
-                     <Trophy className="h-8 w-8 text-yellow-500" />
+                  <div className="flex items-center gap-4 text-white">
+                     <div className="h-10 w-10 flex items-center justify-center bg-white/5 rounded-lg p-1.5">
+                        <img src={getCompetitionLogo(league.id)!} alt={league.name} className="h-full w-full object-contain" />
+                     </div>
                      <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{league}</h3>
+                        <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{league.name}</h3>
                         <p className="text-sm text-muted-foreground">Top Division</p>
                      </div>
                   </div>
@@ -87,17 +107,17 @@ export default function WorldBrowser() {
       return (
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TEAMS.map((team, i) => (
-            <Link key={team} href={`/world/${slug[0]}/${slug[1]}/${slug[2]}/${team}`}>
+            <Link key={team.name} href={`/world/${slug[0]}/${slug[1]}/${slug[2]}/${team.name}`}>
                <motion.div
                  initial={{ opacity: 0, scale: 0.9 }}
                  animate={{ opacity: 1, scale: 1 }}
                  transition={{ delay: i * 0.05 }}
               >
-                <Card className="p-6 bg-surface border-white/5 hover:bg-white/5 transition-all cursor-pointer flex flex-col items-center gap-4 text-center">
-                  <div className="h-16 w-16 rounded-full bg-white/10 flex items-center justify-center">
-                      <Shield className="h-8 w-8 text-white" />
+                <Card className="p-6 bg-surface border-white/5 hover:border-primary/50 transition-all cursor-pointer flex flex-col items-center gap-4 text-center">
+                  <div className="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center p-4">
+                      <img src={getTeamLogo(team.id)!} alt={team.name} className="h-full w-full object-contain" />
                   </div>
-                  <span className="text-lg font-bold text-white">{team}</span>
+                  <span className="text-lg font-bold text-white group-hover:text-primary transition-colors">{team.name}</span>
                 </Card>
               </motion.div>
             </Link>
@@ -140,16 +160,16 @@ export default function WorldBrowser() {
               <Badge variant="outline">24 Players</Badge>
           </div>
           {PLAYERS.map((player, i) => (
-            <Link key={player.name} href={`/player/1`}> {/* In real app, use player ID */}
+            <Link key={player.name} href={`/player/${player.id}`}>
                <motion.div
                  initial={{ opacity: 0, x: -10 }}
                  animate={{ opacity: 1, x: 0 }}
                  transition={{ delay: i * 0.05 }}
-                 className="flex items-center justify-between p-4 rounded-lg bg-surface border border-white/5 hover:bg-white/5 transition-colors cursor-pointer group"
+                 className="flex items-center justify-between p-4 rounded-lg bg-surface border border-white/5 hover:border-primary/30 transition-colors cursor-pointer group"
               >
                 <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
-                        <User className="h-5 w-5 text-muted-foreground" />
+                    <div className="h-12 w-12 rounded-full bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center">
+                        <img src={getPlayerPhoto(player.id)} alt={player.name} className="h-full w-full object-cover" />
                     </div>
                     <div>
                         <h4 className="font-bold text-white group-hover:text-primary transition-colors">{player.name}</h4>

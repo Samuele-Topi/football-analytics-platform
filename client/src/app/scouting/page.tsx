@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Search, Filter, TrendingUp, TrendingDown, Minus, X, ChevronDown } from "lucide-react";
+import { Search, Filter, TrendingUp, TrendingDown, Minus, ChevronDown } from "lucide-react";
 import { getPlayerPhoto } from "@/lib/assets";
 
 // Mock Data

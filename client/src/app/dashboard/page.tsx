@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Activity, Target, Users, TrendingUp } from "lucide-react";
+import { getTeamLogo } from "@/lib/assets";
 
 import { TrendInsights } from "@/components/dashboard/TrendInsights";
 
@@ -82,16 +83,22 @@ export default function Home() {
           <div className="rounded-xl border border-white/5 bg-surface p-6">
             <h2 className="text-xl font-bold text-white mb-4">Recent Alerts</h2>
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
+              {[
+                { teamId: 43, msg: "Man City performance peak", sub: "Squad intensity +15% vs Season Avg" },
+                { teamId: 1, msg: "Arsenal tactical shift", sub: "Inverted fullbacks usage increased" },
+                { teamId: 8, msg: "Liverpool high press", sub: "PPDA dropped to 6.2 in last match" },
+              ].map((alert, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5"
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer border border-transparent hover:border-white/5 group"
                 >
-                  <div className="mt-1 h-2 w-2 rounded-full bg-secondary" />
+                  <div className="mt-1 h-8 w-8 rounded-md bg-white/5 flex items-center justify-center p-1.5 flex-shrink-0 group-hover:border-primary/30 border border-transparent transition-colors">
+                    <img src={getTeamLogo(alert.teamId)!} alt="Logo" className="h-full w-full object-contain" />
+                  </div>
                   <div>
-                    <p className="text-sm font-medium text-white">High xG Performance</p>
-                    <p className="text-xs text-muted-foreground">
-                      Player #10 exceeded expected goals by 1.2
+                    <p className="text-sm font-medium text-white group-hover:text-primary transition-colors">{alert.msg}</p>
+                    <p className="text-xs text-muted-foreground line-clamp-1">
+                      {alert.sub}
                     </p>
                   </div>
                 </div>

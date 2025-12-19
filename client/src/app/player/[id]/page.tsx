@@ -4,21 +4,25 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Activity, TrendingUp, DollarSign, Shield, MapPin, Calendar, Star } from "lucide-react";
+import { Activity, TrendingUp, Calendar, Star } from "lucide-react";
 import { useParams } from "next/navigation";
+import { getPlayerPhoto, getTeamLogo, getCountryFlag } from "@/lib/assets";
 
 export default function PlayerProfile() {
   const params = useParams();
-  const playerId = params.id;
+  const playerId = params.id as string;
 
   // Mock Data - In a real app, fetch based on playerId
   const player = {
+    id: playerId === "1" ? 110633 : parseInt(playerId) || 110633, // Default to Haaland if ID is 1 (old mock) or invalid
     name: "Erling Haaland",
+    teamId: 43, // Manchester City
     team: "Manchester City",
     number: "9",
     position: "ST",
     age: 23,
     nationality: "Norway",
+    natCode: "NO",
     height: "195cm",
     foot: "Left",
     value: "€180M",
@@ -41,17 +45,28 @@ export default function PlayerProfile() {
         className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b border-white/10 pb-6"
       >
         <div className="flex items-center gap-6">
-          <div className="h-24 w-24 rounded-full bg-surface border-4 border-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
-            {player.number}
+          <div className="h-32 w-32 rounded-full bg-surface border-4 border-primary/20 overflow-hidden flex items-center justify-center">
+            <img 
+                src={getPlayerPhoto(player.id)} 
+                alt={player.name}
+                className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <div className="flex items-center gap-3 mb-1">
               <h1 className="text-4xl font-bold text-white">{player.name}</h1>
               <Badge className="bg-primary text-black font-bold">{player.position}</Badge>
+              <span className="text-2xl font-black text-white/20">#{player.number}</span>
             </div>
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm">
-              <span className="flex items-center gap-1"><Shield className="h-3 w-3" /> {player.team}</span>
-              <span className="flex items-center gap-1"><MapPin className="h-3 w-3" /> {player.nationality}</span>
+              <span className="flex items-center gap-2">
+                <img src={getTeamLogo(player.teamId)!} alt={player.team} className="h-4 w-4 object-contain" />
+                {player.team}
+              </span>
+              <span className="flex items-center gap-2">
+                <img src={getCountryFlag(player.natCode)!} alt={player.nationality} className="h-3 w-5 object-cover rounded-sm" />
+                {player.nationality}
+              </span>
               <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {player.age} Years</span>
             </div>
           </div>

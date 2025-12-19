@@ -5,7 +5,14 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Globe, ArrowRight } from "lucide-react";
 
-const CONTINENTS = ["Europe", "South America", "Asia", "Africa", "North America", "Oceania"];
+const CONTINENTS = [
+    { name: "Europe", code: "EU" },
+    { name: "South America", code: "SA" },
+    { name: "Asia", code: "AS" },
+    { name: "Africa", code: "AF" },
+    { name: "North America", code: "NA" },
+    { name: "Oceania", code: "OC" }
+];
 
 export default function WorldRoot() {
   return (
@@ -26,7 +33,7 @@ export default function WorldRoot() {
 
       <div className="grid md:grid-cols-3 gap-6">
           {CONTINENTS.map((cont, i) => (
-              <Link key={cont} href={`/world/${cont}`}>
+              <Link key={cont.name} href={`/world/${cont.name}`}>
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -34,8 +41,10 @@ export default function WorldRoot() {
                   >
                       <Card className="p-8 bg-surface border-white/5 hover:bg-white/5 hover:border-primary/50 transition-all cursor-pointer flex items-center justify-between group">
                           <div className="flex items-center gap-4">
-                              <Globe className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                              <span className="text-xl font-bold text-white">{cont}</span>
+                              <div className="h-12 w-12 rounded-lg bg-primary/5 flex items-center justify-center border border-primary/10 group-hover:border-primary/30 transition-colors">
+                                <Globe className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                              </div>
+                              <span className="text-xl font-bold text-white group-hover:text-primary transition-colors">{cont.name}</span>
                           </div>
                           <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-white" />
                       </Card>

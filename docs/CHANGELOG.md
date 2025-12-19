@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2025-12-19
+
+### Added
+- **Visual Assets Intelligence:** Integrated real-world logos for competitions (UCL, Premier League, etc.), nations (flags), and teams across all pages.
+- **Customizable Profile:** Users can now set a custom profile picture via URL in the Profile page, which persists across the session and updates the Navbar avatar.
+- **Enhanced Player Profiles:** Added official player photos and team logos to the dynamic player pages (`/player/[id]`).
+- **Global Store:** Implemented `useUserStore` (Zustand) for centralized user state management.
+
+### Changed
+- **Assets Utility:** Expanded `client/src/lib/assets.ts` with new sources for flags and competition logos.
+- **World Browser:** Now displays flags for nations and official logos for leagues and teams.
+
 ## [1.3.9] - 2025-12-19
 
 ### Added

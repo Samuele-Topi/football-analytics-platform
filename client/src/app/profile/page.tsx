@@ -6,13 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { User, Mail, Shield, Award, Calendar, LogOut, Activity, X, Plus } from "lucide-react";
-import { getTeamLogo } from "@/lib/assets";
+import { User, Mail, Shield, LogOut, Activity, X, Plus, Camera, RefreshCw } from "lucide-react";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function ProfilePage() {
+  const { profilePic, setProfilePic, resetProfilePic } = useUserStore();
   const [preferences, setPreferences] = useState(["Premier League", "La Liga", "U21 Talents", "Left-Footed CBs", "High xG Strikers"]);
   const [newTag, setNewTag] = useState("");
   const [isAdding, setIsAdding] = useState(false);
+
+  const [picUrl, setPicUrl] = useState("");
+  const [showPicInput, setShowPicInput] = useState(false);
 
   const removePreference = (tag: string) => {
     setPreferences(preferences.filter(p => p !== tag));
@@ -26,6 +30,14 @@ export default function ProfilePage() {
     }
   };
 
+  const updatePic = () => {
+    if (picUrl.trim()) {
+        setProfilePic(picUrl.trim());
+        setPicUrl("");
+        setShowPicInput(false);
+    }
+  };
+
   return (
     <div className="container mx-auto p-6 space-y-8 max-w-4xl">
       <motion.div
@@ -33,18 +45,42 @@ export default function ProfilePage() {
         animate={{ opacity: 1, y: 0 }}
         className="flex items-center gap-6 pb-6 border-b border-white/10"
       >
-        <div className="h-24 w-24 rounded-full bg-surface border-white/10 p-1 overflow-hidden flex-shrink-0">
-            <div className="h-full w-full rounded-full bg-background border-2 border-surface-hover overflow-hidden relative flex items-center justify-center">
-                 {/* Team Logo or Placeholder Avatar */}
-                 {getTeamLogo(43) ? (
-                    <img src={getTeamLogo(43)!} alt="Team Logo" className="w-16 h-16 object-contain" />
-                 ) : (
-                    <User className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground" />
-                 )}
+        <div className="group relative">
+            <div className="h-24 w-24 rounded-full bg-surface border-white/10 p-1 overflow-hidden flex-shrink-0 transition-transform group-hover:scale-105">
+                <div className="h-full w-full rounded-full bg-background border-2 border-surface-hover overflow-hidden relative flex items-center justify-center">
+                    {profilePic ? (
+                        <img src={profilePic} alt="Profile" className="w-16 h-16 object-contain" />
+                    ) : (
+                        <User className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground" />
+                    )}
+                </div>
             </div>
+            <button 
+                onClick={() => setShowPicInput(!showPicInput)}
+                className="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-black text-black hover:scale-110 transition-transform shadow-lg"
+            >
+                <Camera className="h-4 w-4" />
+            </button>
         </div>
+        
         <div className="flex-1">
-            <h1 className="text-3xl font-bold text-white">Head Scout</h1>
+            <div className="flex items-center gap-2">
+                <h1 className="text-3xl font-bold text-white">Head Scout</h1>
+                {showPicInput && (
+                    <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 ml-4">
+                        <Input 
+                            value={picUrl}
+                            onChange={(e) => setPicUrl(e.target.value)}
+                            placeholder="Image URL..." 
+                            className="h-8 w-48 text-xs"
+                        />
+                        <Button size="sm" className="h-8" onClick={updatePic}>Set</Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={resetProfilePic} title="Reset to default">
+                            <RefreshCw className="h-4 w-4" />
+                        </Button>
+                    </motion.div>
+                )}
+            </div>
             <p className="text-muted-foreground">Lead Analyst • Manchester City FC</p>
             <div className="flex gap-2 mt-2">
                 <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">Pro License</Badge>
